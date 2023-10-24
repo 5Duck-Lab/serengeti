@@ -1,11 +1,14 @@
 import { useRef } from 'react';
 import { useSectionRatio } from './hooks/use-section-ratio.ts';
+import { useScrollPosition } from './hooks/use-scroll-position';
 import Scene from './components/THREE/Scene';
 import Section1 from './page/Section1';
 import Section2 from './page/Section2';
 import Section3 from './page/Section3';
 import Section4 from './page/Section4';
 import Section5 from './page/Section5';
+import ProcessBar from './components/processBar/ProcessBar.tsx';
+import './App.css';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -24,9 +27,12 @@ function App() {
     fifth: useSectionRatio(appRef, section5Ref),
   };
 
+  const scrollFactor = useScrollPosition();
+
   return (
     <div ref={appRef}>
       <div ref={section1Ref}>
+        <ProcessBar scrollFactor={scrollFactor} />
         <Section1 />
       </div>
       <div ref={section2Ref}>

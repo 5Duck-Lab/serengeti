@@ -24,7 +24,7 @@ module.exports = {
   settings: { react: { version: 'detect' } },
 
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'no-implicit-coercion': 'error',
 
     'no-undef': 'off',
@@ -120,6 +120,34 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'warn',
     'react/react-in-jsx-scope': 'off',
 
-    'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    'react/no-unknown-property': [
+      'error',
+      {
+        ignore: [
+          'css',
+          'position',
+          'args',
+          'attach',
+          'rotation',
+          'transparent',
+          'map',
+          'side',
+          'position',
+          'toneMapped',
+          'intensity',
+          'visible',
+          'shadow-mapSize-height',
+          'shadow-mapSize-width',
+          'castShadow',
+          'shadow-bias',
+          'shadow-camera-left',
+          'shadow-camera-top',
+          'shadow-camera-bottom',
+          'shadow-camera-right',
+          'dispose',
+          'object',
+        ],
+      },
+    ],
   },
 };

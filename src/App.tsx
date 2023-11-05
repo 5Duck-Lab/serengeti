@@ -7,7 +7,8 @@ import Section2 from './page/Section2';
 import Section3 from './page/Section3';
 import Section4 from './page/Section4';
 import Section5 from './page/Section5';
-import ProcessBar from './components/processBar/ProcessBar.tsx';
+import ProgressBar from './components/progressBar/ProgressBar';
+
 import './App.css';
 
 function App() {
@@ -32,7 +33,6 @@ function App() {
   return (
     <div ref={appRef}>
       <div ref={section1Ref}>
-        <ProcessBar scrollFactor={scrollFactor} />
         <Section1 />
       </div>
       <div ref={section2Ref}>
@@ -50,6 +50,7 @@ function App() {
       {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용*/}
       {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
       <Scene sectionRatio={sectionRatio} />
+      <ProgressBar scrollFactor={scrollFactor} />
     </div>
   );
 }

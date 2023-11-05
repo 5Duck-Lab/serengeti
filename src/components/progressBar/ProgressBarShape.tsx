@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProcessBarShape: React.FC = () => {
-  return <StyledProcessBar />;
+const ProgressBarShape: React.FC = () => {
+  return <StyledProgressBar />;
 };
 
-const StyledProcessBar = styled.div`
+const StyledProgressBar = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -19,4 +19,4 @@ const StyledProcessBar = styled.div`
   }
 `;
 
-export default ProcessBarShape;
+export default ProgressBarShape;

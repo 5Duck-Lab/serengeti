@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProgressBarShape: React.FC = () => {
-  return <StyledProgressBar />;
+interface ProgressBarShapeProps {
+  children: React.ReactNode;
+}
+
+const ProgressBarShape: React.FC<ProgressBarShapeProps> = ({ children }) => {
+  return <StyledProgressBar>{children}</StyledProgressBar>;
 };
 
 const StyledProgressBar = styled.div`

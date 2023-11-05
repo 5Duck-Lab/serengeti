@@ -5,10 +5,10 @@ interface ProgressBarActiveProps {
 }
 
 const ProgressBarActive: React.FC<ProgressBarActiveProps> = ({ scrollFactor }) => {
-  return <StyledActiveProgressBar scrollWidth={scrollFactor} />;
+  return <StyledProgressBarActive scrollWidth={scrollFactor} />;
 };
 
-const StyledActiveProgressBar = styled.div<{ scrollWidth: number }>`
+const StyledProgressBarActive = styled.div<{ scrollWidth: number }>`
   position: fixed;
   top: 0;
   left: 0;

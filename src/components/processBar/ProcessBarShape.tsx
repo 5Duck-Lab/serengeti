@@ -17,6 +17,6 @@ const StyledProcessBar = styled.div`
     height: 100%;
     background-color: #000;
   }
-};`;
+`;
 
 export default ProcessBarShape;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useScrollPosition } from './use-scroll-position.ts';
-import { CAMERA_POSITIONS, CameraKey } from '../constants/cameraPosition.ts';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
+import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
 import { Vector3, Euler } from 'three';
 
 interface SceneProps {

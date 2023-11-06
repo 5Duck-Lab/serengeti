@@ -1,10 +1,10 @@
-import Map from './Map';
+import Map from '@/components/THREE/Map';
 import { PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React from 'react';
-import { useScrollDrivenCameraMovement } from '../../hooks/use-scroll-driven-camera-movement.ts';
-import Character from './Character';
-import { useScrollDrivenCharacterMovement } from '../../hooks/use-scroll-driven-character-movement.ts';
+import { useScrollDrivenCameraMovement } from '@/hooks/use-scroll-driven-camera-movement.ts';
+import Character from '@/components/THREE/Character';
+import { useScrollDrivenCharacterMovement } from '@/hooks/use-scroll-driven-character-movement.ts';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;

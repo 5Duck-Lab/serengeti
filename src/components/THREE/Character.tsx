@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGLTFLoader } from '../../hooks/use-loader';
-import { useCharacterAnimation } from '../../hooks/use-animation';
+import { useGLTFLoader } from '@/hooks/use-loader';
+import { useCharacterAnimation } from '@/hooks/use-animation';
 import { Vector3 } from 'three';
 
 interface CharacterProps {

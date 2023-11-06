@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useScrollPosition } from './use-scroll-position.ts';
-import { CameraKey } from '../constants/cameraPosition.ts';
-import { CHARACTER_POSITIONS } from '../constants/characterPosition.ts';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
+import { CameraKey } from '@/constants/cameraPosition.ts';
+import { CHARACTER_POSITIONS } from '@/constants/characterPosition.ts';
 import { Vector3 } from 'three';
 
 interface SceneProps {

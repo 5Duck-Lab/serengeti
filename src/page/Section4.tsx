@@ -1,4 +1,4 @@
-import Spacing from '../components/Spacing';
+import Spacing from '@/components/Spacing';
 import styled from 'styled-components';
 
 const Section4 = () => {

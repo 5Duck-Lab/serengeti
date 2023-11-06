@@ -1,11 +1,11 @@
 import { useRef } from 'react';
-import { useSectionRatio } from './hooks/use-section-ratio.ts';
-import Scene from './components/THREE/Scene';
-import Section1 from './page/Section1';
-import Section2 from './page/Section2';
-import Section3 from './page/Section3';
-import Section4 from './page/Section4';
-import Section5 from './page/Section5';
+import { useSectionRatio } from '@/hooks/use-section-ratio.ts';
+import Scene from '@/components/THREE/Scene';
+import Section1 from '@/page/Section1';
+import Section2 from '@/page/Section2';
+import Section3 from '@/page/Section3';
+import Section4 from '@/page/Section4';
+import Section5 from '@/page/Section5';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);

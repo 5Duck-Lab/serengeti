@@ -1,15 +1,11 @@
 import { useRef } from 'react';
 import { useSectionRatio } from './hooks/use-section-ratio.ts';
-import { useScrollPosition } from './hooks/use-scroll-position';
 import Scene from './components/THREE/Scene';
 import Section1 from './page/Section1';
 import Section2 from './page/Section2';
 import Section3 from './page/Section3';
 import Section4 from './page/Section4';
 import Section5 from './page/Section5';
-import ProgressBar from './components/progressBar/ProgressBar';
-
-import './App.css';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -27,8 +23,6 @@ function App() {
     fourth: useSectionRatio(appRef, section4Ref),
     fifth: useSectionRatio(appRef, section5Ref),
   };
-
-  const scrollFactor = useScrollPosition();
 
   return (
     <div ref={appRef}>
@@ -50,7 +44,6 @@ function App() {
       {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용*/}
       {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
       <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} />
     </div>
   );
 }

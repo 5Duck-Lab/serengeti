@@ -15,6 +15,7 @@ function App() {
   const section4Ref = useRef<HTMLDivElement>(null);
   const section5Ref = useRef<HTMLDivElement>(null);
 
+  //THIS IS TEST
   //[TBD] 추후 jotai를 이용한 전역스토어로 변경
   const sectionRatio: Record<string, number> = {
     first: useSectionRatio(appRef, section1Ref),

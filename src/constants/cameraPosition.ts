@@ -5,7 +5,7 @@ export type CameraKey = 'first' | 'second' | 'third' | 'fourth' | 'fifth';
 export const CAMERA_POSITIONS: Record<CameraKey, { position: Vector3; rotation: Euler }> = {
   first: {
     position: new Vector3(-35.0, -24.0, 175.7),
-    rotation: new Euler(0.1, -0.1, 0.2),
+    rotation: new Euler(0.0, 0.0, 0.0),
   },
   second: {
     position: new Vector3(-38.4, -21.6, 137.9),

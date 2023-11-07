@@ -16,7 +16,7 @@ const StyledProgressBar = styled.div`
   width: 100%;
   height: 10px;
   background-color: #fff;
-  z-index: 9990;
+  z-index: 1;
   .progress {
     height: 100%;
     background-color: #000;

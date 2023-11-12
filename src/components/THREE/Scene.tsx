@@ -5,6 +5,7 @@ import React from 'react';
 import { useScrollDrivenCameraMovement } from '@/hooks/use-scroll-driven-camera-movement.ts';
 import Character from '@/components/THREE/Character';
 import { useScrollDrivenCharacterMovement } from '@/hooks/use-scroll-driven-character-movement.ts';
+import { useCharacterRotation } from '@/hooks/use-character-rotation.ts';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
@@ -13,12 +14,13 @@ interface SceneProps {
 const Scene: React.FC<SceneProps> = ({ sectionRatio }) => {
   const { position, rotation } = useScrollDrivenCameraMovement({ sectionRatio });
   const { characterPosition } = useScrollDrivenCharacterMovement({ sectionRatio });
+  const characterRotation = useCharacterRotation(characterPosition);
 
   return (
     <>
       <Canvas shadows flat style={canvasStyle}>
         <PerspectiveCamera makeDefault position={position} rotation={rotation} />
-        <Character position={characterPosition} />
+        <Character position={characterPosition} rotation={characterRotation} />
         <ambientLight />
         <directionalLight
           castShadow

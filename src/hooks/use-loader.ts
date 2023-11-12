@@ -2,6 +2,7 @@ import { ObjectMap, useLoader, useThree } from '@react-three/fiber';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { GLTF, GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { KTX2Loader } from 'three/addons/loaders/KTX2Loader.js';
+import { Mesh, Object3D } from 'three';
 
 const useGLTFLoader = (url: string): GLTF & ObjectMap => {
   const gl = useThree(state => state.gl);
@@ -20,8 +21,8 @@ const useGLTFLoader = (url: string): GLTF & ObjectMap => {
   });
 
   // Traverse the scene and set shadows for each mesh
-  gltf.scene.traverse(child => {
-    if (child.isMesh) {
+  gltf.scene.traverse((child: Object3D) => {
+    if ((child as Mesh).isMesh) {
       child.castShadow = true;
       child.receiveShadow = true;
     }

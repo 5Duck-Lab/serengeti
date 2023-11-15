@@ -9,7 +9,7 @@ const Section4 = () => {
       <h1> Welcome to Section4</h1>
       <h1> Welcome to Section4</h1>
       <Spacing size={100} />
-      <RightContainer>
+      {/* <RightContainer>
         <h3> Welcome to Section4😃😃😃😃😃</h3>
         <h3> Welcome to Section4😁😁😁😁😁</h3>
         <h3> Welcome to Section4😙😙😙😙😙</h3>
@@ -19,7 +19,7 @@ const Section4 = () => {
         <h3> Welcome to Section4😃😃😃😃😃</h3>
         <h3> Welcome to Section4😁😁😁😁😁</h3>
         <h3> Welcome to Section4😙😙😙😙😙</h3>
-      </RightContainer>
+      </RightContainer> */}
       <Spacing size={2000} />
     </div>
   );

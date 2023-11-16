@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { NotionRenderer } from 'react-notion';
+import { useSectionText } from '@/hooks/use-section-text';
+import { TEXT } from '@/constants/sectionText';
 const Section3 = () => {
   const [recordMap, setRecordMap] = useState(null);
+  const { notionPageId } = useSectionText({ TEXT });
   useEffect(() => {
-    const NOTION_PAGE_ID = '43cf367fd2e1492dac4363f7ee475fce';
-    fetch(`https://notion-api.splitbee.io/v1/page/${NOTION_PAGE_ID}`)
+    fetch(`https://notion-api.splitbee.io/v1/page/${notionPageId}`)
       .then(res => res.json())
       .then(resJson => {
         setRecordMap(resJson);
       });
-  }, []);
+  }, [notionPageId]);
   return (
     <div style={{ position: 'relative', zIndex: 2, backgroundColor: 'white' }}>
       {recordMap && <NotionRenderer blockMap={recordMap} fullPage={true} />}

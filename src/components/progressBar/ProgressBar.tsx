@@ -1,6 +1,7 @@
 import React from 'react';
 import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
+// import styled from 'styled-components';
 
 interface ProgressBarProps {
   scrollFactor: number;
@@ -8,11 +9,9 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor }) => {
   return (
-    <>
-      <ProgressBarShape>
-        <ProgressBarActive scrollFactor={scrollFactor} />
-      </ProgressBarShape>
-    </>
+    <ProgressBarShape>
+      <ProgressBarActive scrollFactor={scrollFactor} />
+    </ProgressBarShape>
   );
 };
 

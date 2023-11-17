@@ -31,7 +31,7 @@ function App() {
   return (
     <div ref={appRef}>
       <div ref={section1Ref}>
-        <ProcessBar scrollFactor={scrollFactor} />
+        <ProgressBar scrollFactor={scrollFactor} />
         <Section1 />
       </div>
       <div ref={section2Ref}>

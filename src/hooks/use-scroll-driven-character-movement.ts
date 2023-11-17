@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
-import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
-import { Vector3, Euler } from 'three';
+import { CameraKey } from '@/constants/cameraPosition.ts';
+import { CHARACTER_POSITIONS } from '@/constants/characterPosition.ts';
+import { Vector3 } from 'three';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
 }
 
-export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
+export const useScrollDrivenCharacterMovement = ({ sectionRatio }: SceneProps) => {
   const scrollFactor = useScrollPosition();
-  const [cameraPosition, setCameraPosition] = useState(new Vector3().copy(CAMERA_POSITIONS.first.position));
-  const [cameraRotation, setCameraRotation] = useState(new Euler().copy(CAMERA_POSITIONS.first.rotation));
+  const [characterPosition, setCharacterPosition] = useState(new Vector3().copy(CHARACTER_POSITIONS.first.position));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,15 +19,9 @@ export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
 
       // <Important Logic>: Update camera position
       const updatedCameraPosition = new Vector3()
-        .copy(CAMERA_POSITIONS[startKey].position)
-        .lerp(CAMERA_POSITIONS[endKey].position, sectionScrollFactor);
-      setCameraPosition(updatedCameraPosition);
-
-      // <Important Logic>: Update camera rotation
-      const startRotationVec = new Vector3().setFromEuler(CAMERA_POSITIONS[startKey].rotation);
-      const endRotationVec = new Vector3().setFromEuler(CAMERA_POSITIONS[endKey].rotation);
-      const updatedCameraRotationVec = startRotationVec.lerp(endRotationVec, sectionScrollFactor);
-      setCameraRotation(new Euler().setFromVector3(updatedCameraRotationVec));
+        .copy(CHARACTER_POSITIONS[startKey].position)
+        .lerp(CHARACTER_POSITIONS[endKey].position, sectionScrollFactor);
+      setCharacterPosition(updatedCameraPosition);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -35,15 +29,14 @@ export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
   }, [scrollFactor, sectionRatio]);
 
   return {
-    position: cameraPosition,
-    rotation: cameraRotation,
+    characterPosition: characterPosition,
   };
 };
 
 /**
  * @description
  * if you want to add new sections,
- * edit this code, not the code above(useScrollDrivenCameraMovement)
+ * edit this code, not the code above(useScrollDrivenCharacterMovement)
  */
 const determineCameraKeysAndFactors = (scrollFactor: number, sectionRatio: Record<string, number>) => {
   let startKey: CameraKey = 'first';

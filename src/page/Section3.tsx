@@ -1,18 +1,32 @@
+import { USER_PROFILE } from '@/constants/useProfile';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { NotionRenderer } from 'react-notion';
+import { NotionRenderer } from 'react-notion-x';
+import { ExtendedRecordMap } from 'notion-types';
 const Section3 = () => {
-  const [recordMap, setRecordMap] = useState(null);
+  const { notionPageId } = USER_PROFILE;
+
+  const [recordMap, setRecordMap] = useState<ExtendedRecordMap | null>(null);
   useEffect(() => {
-    const NOTION_PAGE_ID = '43cf367fd2e1492dac4363f7ee475fce';
-    fetch(`https://notion-api.splitbee.io/v1/page/${NOTION_PAGE_ID}`)
-      .then(res => res.json())
-      .then(resJson => {
-        setRecordMap(resJson);
+    axios
+      .get('https://serengeti-server.onrender.com/api/notion', {
+        params: {
+          pageId: notionPageId,
+        },
+      })
+      .then(response => {
+        // 응답 처리
+        setRecordMap(response.data);
+      })
+
+      .catch(error => {
+        console.error(error);
+        // 에러 처리
       });
-  }, []);
+  }, [notionPageId]);
   return (
     <div style={{ position: 'relative', zIndex: 2, backgroundColor: 'white' }}>
-      {recordMap && <NotionRenderer blockMap={recordMap} fullPage={true} />}
+      {recordMap && <NotionRenderer recordMap={recordMap} fullPage={true} />}
       {/* <Spacing size={2000} /> */}
     </div>
   );

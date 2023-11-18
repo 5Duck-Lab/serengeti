@@ -14,7 +14,6 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, sectionRefs }) 
 
   const handleClick = (index: number) => {
     const targetPosition = sectionRefs[index];
-    console.log(targetPosition);
 
     // targetPosition가 유효한 경우에만 스크롤 수행
     if (!isNaN(targetPosition)) {

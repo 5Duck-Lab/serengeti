@@ -1,10 +1,10 @@
 import Spacing from '@/components/Spacing';
-import { TEXT } from '@/constants/sectionText';
+import { USER_PROFILE } from '@/constants/useProfile';
 import styled from 'styled-components';
 
 const Section1 = () => {
   //Title Page
-  const { title, aboutMe } = TEXT;
+  const { title, aboutMe } = USER_PROFILE;
 
   return (
     <div style={{ position: 'relative', zIndex: 2 }}>

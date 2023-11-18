@@ -1,9 +1,9 @@
 import Spacing from '@/components/Spacing';
-import { TEXT } from '@/constants/sectionText';
+import { USER_PROFILE } from '@/constants/useProfile';
 import styled from 'styled-components';
 
 const Section5 = () => {
-  const { number, email, githubLink } = TEXT;
+  const { number, email, githubLink } = USER_PROFILE;
   const onClick = () => {
     window.open(githubLink);
   };

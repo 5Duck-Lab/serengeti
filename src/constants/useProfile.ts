@@ -1,4 +1,4 @@
-export type TextProps = {
+export type UserProfileProps = {
   title: string;
   name: string;
   education: string;
@@ -11,10 +11,8 @@ export type TextProps = {
   githubLink: string;
   aboutMe: string;
 };
-export interface SectionTextProps {
-  sectionText: TextProps;
-}
-export const TEXT: TextProps = {
+
+export const USER_PROFILE: UserProfileProps = {
   title: 'Serengeti 개발자 ',
   name: '유진하',
   education: '광운대학교 컴퓨터소프트웨어학부 졸업',

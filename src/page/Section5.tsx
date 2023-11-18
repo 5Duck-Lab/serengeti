@@ -1,10 +1,9 @@
 import Spacing from '@/components/Spacing';
-import { useSectionText } from '@/hooks/use-section-text';
 import { TEXT } from '@/constants/sectionText';
 import styled from 'styled-components';
 
 const Section5 = () => {
-  const { number, email, githubLink } = useSectionText({ TEXT });
+  const { number, email, githubLink } = TEXT;
   const onClick = () => {
     window.open(githubLink);
   };

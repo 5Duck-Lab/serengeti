@@ -1,10 +1,9 @@
 import Spacing from '@/components/Spacing';
-import { useSectionText } from '@/hooks/use-section-text';
 import { TEXT } from '@/constants/sectionText';
 import styled from 'styled-components';
 
 const Section2 = () => {
-  const { name, education, techStack, career, field } = useSectionText({ TEXT });
+  const { name, education, techStack, career, field } = TEXT;
   return (
     <div style={{ position: 'relative', zIndex: 2 }}>
       <Spacing size={1000} />

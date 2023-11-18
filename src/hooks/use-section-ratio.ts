@@ -13,6 +13,5 @@ export const useSectionRatio = (
       setSectionRatio(sectionHeight / totalHeight);
     }
   }, [appRef, sectionRef]);
-
   return sectionRatio;
 };

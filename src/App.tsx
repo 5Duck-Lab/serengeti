@@ -26,12 +26,20 @@ function App() {
     fifth: useSectionRatio(appRef, section5Ref),
   };
 
+  const sectionRefs = [
+    0,
+    sectionRatio.first,
+    sectionRatio.first + sectionRatio.second,
+    sectionRatio.first + sectionRatio.second + sectionRatio.third,
+    sectionRatio.first + sectionRatio.second + sectionRatio.third + sectionRatio.fourth,
+    1,
+  ];
+
   const scrollFactor = useScrollPosition();
 
   return (
     <div ref={appRef}>
       <div ref={section1Ref}>
-        <ProgressBar scrollFactor={scrollFactor} />
         <Section1 />
       </div>
       <div ref={section2Ref}>
@@ -49,7 +57,7 @@ function App() {
       {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용*/}
       {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
       <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} />
+      <ProgressBar scrollFactor={scrollFactor} sectionRefs={sectionRefs} />
     </div>
   );
 }

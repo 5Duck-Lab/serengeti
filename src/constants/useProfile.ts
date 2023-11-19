@@ -14,15 +14,15 @@ export type UserProfileProps = {
 
 export const USER_PROFILE: UserProfileProps = {
   title: 'Serengeti 개발자 ',
-  name: '유진하',
-  education: '광운대학교 컴퓨터소프트웨어학부 졸업',
-  career: 'Tmax Metaverse',
-  field: 'Frontd',
-  techStack: 'react, javascript, three js',
-  number: '010-6553-1916',
-  email: 'yjs19162@daum.net',
-  notionPageId: '43cf367fd2e1492dac4363f7ee475fce',
-  githubLink: 'https://github.com/YooJinHa96/serengeti',
+  name: '홍길동',
+  education: '고구려대학교 컴퓨터공학과 졸업',
+  career: '구글 수석 엔지니어 ',
+  field: 'Front-end',
+  techStack: 'react, javascript, typescript, html, css',
+  number: '010-1234-5678',
+  email: 'serengti@serengti.net',
+  notionPageId: 'pageId',
+  githubLink: 'https://github.com/',
   aboutMe:
-    '안녕하세요, 저는 Serengeti 개발자 유진하입니다.\n지금부터 제 소개를 시작해볼까 합니다.\n저에 대해 더 알고 싶으시다면\nScroll을 내려주세요.',
+    '안녕하세요, 저는 Serengeti 개발자 홍길동입니다.\n지금부터 제 소개를 시작해볼까 합니다.\n저에 대해 더 알고 싶으시다면\nScroll을 내려주세요.',
 };

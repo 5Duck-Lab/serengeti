@@ -22,7 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-
+src/constants/useProfile.ts
 #env
 .env*

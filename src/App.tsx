@@ -29,12 +29,13 @@ function App() {
   const sectionRefs = [
     0,
     sectionRatio.first,
-    sectionRatio.first + sectionRatio.second,
-    sectionRatio.first + sectionRatio.second + sectionRatio.third,
-    sectionRatio.first + sectionRatio.second + sectionRatio.third + sectionRatio.fourth,
+    sectionRatio.second,
+    sectionRatio.third,
+    sectionRatio.fourth,
+    sectionRatio.fifth,
     1,
   ];
-
+  console.log(sectionRatio);
   const scrollFactor = useScrollPosition();
 
   return (

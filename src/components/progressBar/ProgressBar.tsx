@@ -8,11 +8,9 @@ interface ProgressBarProps {
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor }) => {
   return (
-    <>
-      <ProgressBarShape>
-        <ProgressBarActive scrollFactor={scrollFactor} />
-      </ProgressBarShape>
-    </>
+    <ProgressBarShape>
+      <ProgressBarActive scrollFactor={scrollFactor} />
+    </ProgressBarShape>
   );
 };
 

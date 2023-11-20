@@ -6,21 +6,18 @@ interface ProgressBarShapeProps {
 }
 
 const ProgressBarShape: React.FC<ProgressBarShapeProps> = ({ children }) => {
-  return <StyledProgressBar>{children}</StyledProgressBar>;
+  return <StyledProgressBarContainer>{children}</StyledProgressBarContainer>;
 };
 
-const StyledProgressBar = styled.div`
+const StyledProgressBarContainer = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  bottom: 5vw;
+  right: 5vw;
+  width: 40%;
   height: 10px;
-  background-color: #fff;
-  z-index: 1;
-  .progress {
-    height: 100%;
-    background-color: #000;
-  }
+  margin: 0 -5px;
+  // background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
 `;
 
 export default ProgressBarShape;

@@ -16,6 +16,7 @@ const StyledProgressBarContainer = styled.div`
   width: 40%;
   height: 10px;
   margin: 0 -5px;
+  // background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
 `;
 

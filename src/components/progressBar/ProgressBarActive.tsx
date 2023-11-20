@@ -10,6 +10,7 @@ const StyledProgressBarActive = styled.div<{ scrollWidth: number }>`
   width: ${({ scrollWidth }) => scrollWidth * 100}%;
   height: 10px;
   background-color: yellow;
+  border-radius: 5px;
   z-index: 1;
 `;
 

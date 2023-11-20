@@ -2,31 +2,56 @@ import React from 'react';
 import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
+import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef'; // 사용자 정의 훅 import
 
 interface ProgressBarProps {
   scrollFactor: number;
+  sectionRefs: number[];
 }
 
-const fileNames = ['file1', 'file2', 'file3', 'file4', 'file5'];
+const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, sectionRefs }) => {
+  const smoothScrollToRef = playSmoothScrollToRef(); // 사용자 정의 스무스 스크롤 훅
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor }) => {
+  const handleClick = (index: number) => {
+    const targetPosition = sectionRefs[index];
+
+    // targetPosition가 유효한 경우에만 스크롤 수행
+    if (!isNaN(targetPosition)) {
+      const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTo = targetPosition * totalScrollHeight;
+      smoothScrollToRef(scrollTo);
+    }
+  };
+
   return (
     <ProgressBarShape>
       <ProgressBarActive scrollFactor={scrollFactor} />
-      <div style={{ display: 'flex', justifyContent: 'space-between', position: 'relative', top: '-17px' }}>
-        {fileNames.map((fileName, index) => (
-          <Checkpoint key={index} checked={index <= scrollFactor * (fileNames.length - 1)} />
+      <CheckpointsContainer>
+        {sectionRefs.map((position, index) => (
+          <Checkpoint
+            key={index}
+            checked={index <= scrollFactor * (sectionRefs.length - 1)}
+            onClick={() => handleClick(index)}
+          />
         ))}
-      </div>
+      </CheckpointsContainer>
     </ProgressBarShape>
   );
 };
+
+const CheckpointsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: -17px;
+`;
 
 const Checkpoint = styled.div<{ checked: boolean }>`
   width: 24px;
   height: 24px;
   border-radius: 50%;
   background-color: ${({ checked }) => (checked ? 'yellow' : 'gray')};
+  cursor: pointer;
   z-index: 3;
 `;
 

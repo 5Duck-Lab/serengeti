@@ -14,13 +14,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, sectionRefs }) 
 
   const handleClick = (index: number) => {
     const targetPosition = sectionRefs[index];
-
-    // targetPosition가 유효한 경우에만 스크롤 수행
-    if (!isNaN(targetPosition)) {
-      const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
-      const scrollTo = targetPosition * totalScrollHeight;
-      smoothScrollToRef(scrollTo);
-    }
+    const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
+    const scrollTo = targetPosition * totalScrollHeight;
+    smoothScrollToRef(scrollTo);
   };
 
   return (

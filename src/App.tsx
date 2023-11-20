@@ -26,16 +26,8 @@ function App() {
     fifth: useSectionRatio(appRef, section5Ref),
   };
 
-  const sectionRefs = [
-    0,
-    sectionRatio.first,
-    sectionRatio.second,
-    sectionRatio.third,
-    sectionRatio.fourth,
-    sectionRatio.fifth,
-    1,
-  ];
-  console.log(sectionRatio);
+  const sectionRefs = [0, sectionRatio.first, sectionRatio.second, sectionRatio.third, sectionRatio.fourth, 1];
+
   const scrollFactor = useScrollPosition();
 
   return (

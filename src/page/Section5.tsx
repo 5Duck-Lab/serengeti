@@ -8,7 +8,6 @@ const Section5 = () => {
     window.open(githubLink);
   };
   const onMailBtnHandler = () => {
-    console.log(email);
     const a = document.createElement('a');
     a.href = `mailto:${email}`;
     a.click();

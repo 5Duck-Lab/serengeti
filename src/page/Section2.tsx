@@ -17,7 +17,6 @@ const Section2 = () => {
         <Content>기술 스택 : {techStack}</Content>
         <Content>경력 : {career}</Content>
       </RightContent>
-
       <Spacing size={1000} />
     </Wrapper>
   );
@@ -39,6 +38,5 @@ const Content = styled.h2`
 const RightContent = styled.div`
   position: absolute;
   width: 50%;
-
   right: 0;
 `;

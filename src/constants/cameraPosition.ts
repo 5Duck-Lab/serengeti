@@ -9,7 +9,7 @@ export const CAMERA_POSITIONS: Record<CameraKey, { position: Vector3; rotation: 
   },
   second: {
     position: new Vector3(-38.4, -21.6, 137.9),
-    rotation: new Euler(0.2, -1.1, 0.1),
+    rotation: new Euler(0.2, -1.4, 0.1),
   },
   third: {
     position: new Vector3(52.1, -20.5, 89.9),

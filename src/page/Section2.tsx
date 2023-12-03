@@ -1,6 +1,6 @@
 import Spacing from '@/components/Spacing.tsx';
 import { USER_PROFILE } from '@/constants/useProfile';
-
+import TechStackIcon from '@/components/techStackIcon';
 import styled from 'styled-components';
 import Rainbow from '@/components/Rainbow.tsx';
 
@@ -17,7 +17,8 @@ const Section2 = () => {
         <Content>이름 : {name}</Content>
         <Content>학력 : {education}</Content>
         <Content>직군 : {field}</Content>
-        <Content>기술 스택 : {techStack}</Content>
+        <Content>기술 스택: </Content>
+        <TechStackIcon techs={techStack} />
         <Content>경력 : {career}</Content>
       </RightContent>
       <Spacing size={1000} />

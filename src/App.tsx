@@ -1,13 +1,14 @@
 import { useRef } from 'react';
 import { useSectionRatio } from '@/hooks/use-section-ratio.ts';
-import { useScrollPosition } from '@/hooks/use-scroll-position';
+// import { useScrollPosition } from '@/hooks/use-scroll-position';
 import Scene from '@/components/THREE/Scene';
 import Section1 from '@/page/Section1';
 import Section2 from '@/page/Section2';
 import Section3 from '@/page/Section3';
 import Section4 from '@/page/Section4';
 import Section5 from '@/page/Section5';
-import ProgressBar from '@/components/progressBar/ProgressBar';
+//import ProgressBar from '@/components/progressBar/ProgressBar';
+import styled from 'styled-components';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ function App() {
   const scrollFactor = useScrollPosition();
 
   return (
-    <div ref={appRef}>
+    <MainWrapper ref={appRef}>
       <div ref={section1Ref}>
         <Section1 />
       </div>
@@ -47,8 +48,10 @@ function App() {
       <div ref={section5Ref}>
         <Section5 />
       </div>
-      {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용*/}
-      {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
+      {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
+        {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
+
+      {/* <ProgressBar scrollFactor={scrollFactor} /> */}
       <Scene sectionRatio={sectionRatio} />
       <ProgressBar scrollFactor={scrollFactor} sectionRefs={sectionRefs} />
     </div>
@@ -56,3 +59,7 @@ function App() {
 }
 
 export default App;
+// width: calc(100vw - ${props => props.$scrollbarWidth}px);
+const MainWrapper = styled.div`
+  width: 100vw;
+`;

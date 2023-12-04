@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 import { CameraKey } from '@/constants/cameraPosition.ts';
 import { CHARACTER_POSITIONS } from '@/constants/characterPosition.ts';
-import { Vector3 } from 'three';
+import { Vector3, QuadraticBezierCurve3 } from 'three';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
@@ -18,10 +18,13 @@ export const useScrollDrivenCharacterMovement = ({ sectionRatio }: SceneProps) =
       const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
 
       // <Important Logic>: Update camera position
-      const updatedCameraPosition = new Vector3()
-        .copy(CHARACTER_POSITIONS[startKey].position)
-        .lerp(CHARACTER_POSITIONS[endKey].position, sectionScrollFactor);
-      setCharacterPosition(updatedCameraPosition);
+      const curve = new QuadraticBezierCurve3(
+        CHARACTER_POSITIONS[startKey].position,
+        CHARACTER_POSITIONS[startKey].controlPoint,
+        CHARACTER_POSITIONS[endKey].position
+      );
+      const curvePosition = curve.getPoint(sectionScrollFactor);
+      setCharacterPosition(curvePosition);
     };
 
     window.addEventListener('scroll', handleScroll);

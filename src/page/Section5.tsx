@@ -7,6 +7,11 @@ const Section5 = () => {
   const onClick = () => {
     window.open(githubLink);
   };
+  const onMailBtnHandler = () => {
+    const a = document.createElement('a');
+    a.href = `mailto:${email}`;
+    a.click();
+  };
   return (
     <div style={{ position: 'absolute', zIndex: 2, right: 0 }}>
       <Spacing direction="horizontal" size={900} />
@@ -18,12 +23,16 @@ const Section5 = () => {
           <Img src={'/github-mark.png'} />
           <ButtonLabel> {'GIT 바로가기'}</ButtonLabel>
         </Button>
+        <Button onClick={onMailBtnHandler}>
+          <Img src={'/mail_icon.svg'} />
+          <ButtonLabel> {'Mail 보내기'}</ButtonLabel>
+        </Button>
       </ButtonContainer>
       <Spacing size={400} />
     </div>
   );
 };
-
+//mail_icon
 export default Section5;
 const SectionTitle = styled.h1`
   color: #fffdd0;
@@ -34,6 +43,9 @@ const ContactInfo = styled.h3`
 const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
+  button:not(:last-child) {
+    margin-right: 20px; /* 마지막 버튼을 제외한 모든 버튼의 우측에 마진 추가 */
+  }
 `;
 
 const Button = styled.button`

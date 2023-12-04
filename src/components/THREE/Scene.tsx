@@ -17,25 +17,23 @@ const Scene: React.FC<SceneProps> = ({ sectionRatio }) => {
   const characterRotation = useCharacterRotation(characterPosition);
 
   return (
-    <>
-      <Canvas shadows flat style={canvasStyle}>
-        <PerspectiveCamera makeDefault position={position} rotation={rotation} />
-        <Character position={characterPosition} rotation={characterRotation} />
-        <ambientLight />
-        <directionalLight
-          castShadow
-          shadow-bias={-0.0001}
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-          position={[10, 18, 11.5]}
-          shadow-camera-left={-50}
-          shadow-camera-right={50}
-          shadow-camera-top={50}
-          shadow-camera-bottom={-50}
-        />
-        <Map />
-      </Canvas>
-    </>
+    <Canvas shadows flat style={canvasStyle}>
+      <PerspectiveCamera makeDefault position={position} rotation={rotation} />
+      <Character position={characterPosition} rotation={characterRotation} />
+      <ambientLight />
+      <directionalLight
+        castShadow
+        shadow-bias={-0.0001}
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        position={[10, 18, 11.5]}
+        shadow-camera-left={-50}
+        shadow-camera-right={50}
+        shadow-camera-top={50}
+        shadow-camera-bottom={-50}
+      />
+      <Map />
+    </Canvas>
   );
 };
 export default Scene;

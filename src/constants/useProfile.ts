@@ -2,7 +2,7 @@ export type UserProfileProps = {
   title: string;
   name: string;
   education: string;
-  techStack: string;
+  techStack: string[];
   career: string;
   field: string;
   number: string;
@@ -19,7 +19,7 @@ export const USER_PROFILE: UserProfileProps = {
   career: `레벨 277 달성, 무릉 61층, 제네시스 무기 해방, 유니온 8800,
   검은마법사 격파, 더 시드, 50층 격파`,
   field: '시너지 딜러',
-  techStack: 'react, javascript, typescript, html, css',
+  techStack: ['react', 'javascript', 'typescript', 'html', 'css', 'aws', 'mongodb', 'nginx'],
   number: '010-1234-5678',
   email: 'serengti@serengti.net',
   notionPageId: '9110d2048ce0460084a576c0b09c012c',

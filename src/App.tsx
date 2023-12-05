@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useSectionRatio } from '@/hooks/use-section-ratio.ts';
-// import { useScrollPosition } from '@/hooks/use-scroll-position';
+import { useScrollPosition } from '@/hooks/use-scroll-position';
 import Scene from '@/components/THREE/Scene';
 import Section1 from '@/page/Section1';
 import Section2 from '@/page/Section2';
 import Section3 from '@/page/Section3';
 import Section4 from '@/page/Section4';
 import Section5 from '@/page/Section5';
-//import ProgressBar from '@/components/progressBar/ProgressBar';
+import ProgressBar from '@/components/progressBar/ProgressBar';
 import styled from 'styled-components';
 
 function App() {
@@ -27,7 +27,9 @@ function App() {
     fifth: useSectionRatio(appRef, section5Ref),
   };
 
-  // const scrollFactor = useScrollPosition();
+  const sectionRefs = [0, sectionRatio.first, sectionRatio.second, sectionRatio.third, sectionRatio.fourth, 1];
+
+  const scrollFactor = useScrollPosition();
 
   return (
     <MainWrapper ref={appRef}>
@@ -51,6 +53,7 @@ function App() {
 
       {/* <ProgressBar scrollFactor={scrollFactor} /> */}
       <Scene sectionRatio={sectionRatio} />
+      <ProgressBar scrollFactor={scrollFactor} sectionRefs={sectionRefs} />
     </MainWrapper>
   );
 }

@@ -7,13 +7,16 @@ export const useCharacterRotation = (currentPosition: Vector3): Euler => {
   const [characterRotation, setCharacterRotation] = useState(new Euler(0, 0, 0));
 
   useEffect(() => {
-    if (!prevPosition.equals(currentPosition)) {
-      const direction = new Vector3().subVectors(currentPosition, prevPosition);
-      const newRotation = calculateRotationFromDirection(direction);
-      setCharacterRotation(newRotation);
-      setPrevPosition(currentPosition.clone());
+    if (!currentPosition || prevPosition.equals(currentPosition)) {
+      return;
     }
-  }, [currentPosition, prevPosition]);
+    const direction = new Vector3().subVectors(currentPosition, prevPosition);
+    const newRotation = calculateRotationFromDirection(direction);
+    setCharacterRotation(newRotation);
+    setPrevPosition(currentPosition.clone());
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPosition]);
 
   return characterRotation;
 };

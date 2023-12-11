@@ -2,32 +2,34 @@ import React from 'react';
 import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
-import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef'; // 사용자 정의 훅 import
+import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef';
 
 interface ProgressBarProps {
   scrollFactor: number;
-  sectionRefs: number[];
+  cumulativeSums: number[];
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, sectionRefs }) => {
-  const smoothScrollToRef = playSmoothScrollToRef(); // 사용자 정의 스무스 스크롤 훅
+const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, cumulativeSums }) => {
+  const smoothScrollToRef = playSmoothScrollToRef();
 
   const handleClick = (index: number) => {
-    const targetPosition = sectionRefs[index];
+    const SCROLL_CORRECTION_FACTOR = 1.01;
+    const targetPosition = cumulativeSums[index];
     const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
-    const scrollTo = targetPosition * totalScrollHeight;
+    const scrollTo = targetPosition * totalScrollHeight * SCROLL_CORRECTION_FACTOR;
+
     smoothScrollToRef(scrollTo);
   };
 
   return (
     <ProgressBarContainer>
       <ProgressBarShape>
-        <ProgressBarActive $customwidth={scrollFactor} />
+        <ProgressBarActive $customwidth={scrollFactor} cumulativeSums={cumulativeSums} />
         <CheckpointsContainer>
-          {sectionRefs.map((_, index) => (
+          {cumulativeSums.map((_, index) => (
             <Checkpoint
               key={index}
-              checked={index <= scrollFactor * (sectionRefs.length - 1)}
+              checked={scrollFactor >= cumulativeSums[index]}
               onClick={() => handleClick(index)}
             />
           ))}

@@ -27,9 +27,21 @@ function App() {
     fifth: useSectionRatio(appRef, section5Ref),
   };
 
-  const sectionRefs = [0, sectionRatio.first, sectionRatio.second, sectionRatio.third, sectionRatio.fourth, 1];
+  const sectionRefs: number[] = [
+    0,
+    sectionRatio.first as number,
+    sectionRatio.second as number,
+    sectionRatio.third as number,
+    sectionRatio.fourth as number,
+    sectionRatio.fifth as number,
+  ];
 
   const scrollFactor = useScrollPosition();
+  const cumulativeSums = sectionRefs.reduce((acc, val) => {
+    const lastSum = acc.length > 0 ? acc[acc.length - 1] : 0;
+    acc.push(lastSum + (val as number));
+    return acc;
+  }, [] as number[]);
 
   return (
     <MainWrapper ref={appRef}>
@@ -53,7 +65,7 @@ function App() {
 
       {/* <ProgressBar scrollFactor={scrollFactor} /> */}
       <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} sectionRefs={sectionRefs} />
+      <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
     </MainWrapper>
   );
 }

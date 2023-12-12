@@ -24,7 +24,6 @@ function App() {
     second: useSectionRatio(appRef, section2Ref),
     third: useSectionRatio(appRef, section3Ref),
     fourth: useSectionRatio(appRef, section4Ref),
-    fifth: useSectionRatio(appRef, section5Ref),
   };
 
   const sectionRefs: number[] = [
@@ -33,7 +32,6 @@ function App() {
     sectionRatio.second as number,
     sectionRatio.third as number,
     sectionRatio.fourth as number,
-    sectionRatio.fifth as number,
   ];
 
   const scrollFactor = useScrollPosition();

@@ -24,7 +24,7 @@ const calculateWidth = (scrollFactor: number, cumulativeSums: number[]) => {
       return (i + progressInSegment) / (cumulativeSums.length - 1);
     }
   }
-  return 0;
+  return 1;
 };
 
 const ProgressBarActive: React.FC<ProgressBarActiveProps> = ({ $customwidth, cumulativeSums }) => {

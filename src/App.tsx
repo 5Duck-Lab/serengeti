@@ -9,6 +9,7 @@ import Section4 from '@/page/Section4';
 import Section5 from '@/page/Section5';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import styled from 'styled-components';
+import LoadingPage from '@/components/LoadingPage.tsx';
 
 function App() {
   const appRef = useRef<HTMLDivElement>(null);
@@ -42,29 +43,32 @@ function App() {
   }, [] as number[]);
 
   return (
-    <MainWrapper ref={appRef}>
-      <div ref={section1Ref}>
-        <Section1 />
-      </div>
-      <div ref={section2Ref}>
-        <Section2 />
-      </div>
-      <div ref={section3Ref}>
-        <Section3 />
-      </div>
-      <div ref={section4Ref}>
-        <Section4 />
-      </div>
-      <div ref={section5Ref}>
-        <Section5 />
-      </div>
-      {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
+    <>
+      <MainWrapper ref={appRef}>
+        <div ref={section1Ref}>
+          <Section1 />
+        </div>
+        <div ref={section2Ref}>
+          <Section2 />
+        </div>
+        <div ref={section3Ref}>
+          <Section3 />
+        </div>
+        <div ref={section4Ref}>
+          <Section4 />
+        </div>
+        <div ref={section5Ref}>
+          <Section5 />
+        </div>
+        {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
         {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
 
-      {/* <ProgressBar scrollFactor={scrollFactor} /> */}
-      <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
-    </MainWrapper>
+        {/* <ProgressBar scrollFactor={scrollFactor} /> */}
+        <Scene sectionRatio={sectionRatio} />
+        <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
+      </MainWrapper>
+      <LoadingPage />
+    </>
   );
 }
 

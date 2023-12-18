@@ -17,6 +17,7 @@ import Section9 from './page/section9';
 interface SectionContainer {
   $scrollbarwidth?: number;
 }
+import LoadingPage from '@/components/LoadingPage.tsx';
 
 function App() {
   const [scrollbarWidth, setScrollbarWidth] = useState(0);
@@ -82,41 +83,44 @@ function App() {
     setScrollbarWidth(calculatedScrollbarWidth);
   }, []);
   return (
-    <MainWrapper $scrollbarwidth={scrollbarWidth} ref={appRef}>
-      <SectionContainer ref={section1Ref}>
-        <Section1 />
-      </SectionContainer>
-      <SectionContainer ref={section2Ref}>
-        <Section2 />
-      </SectionContainer>
-      <SectionContainer ref={section3Ref}>
-        <Section3 />
-      </SectionContainer>
-      <SectionContainer ref={section4Ref}>
-        <Section4 />
-      </SectionContainer>
-      <SectionContainer ref={section5Ref}>
-        <Section5 />
-      </SectionContainer>
-      <SectionContainer ref={section6Ref}>
-        <Section6 />
-      </SectionContainer>
-      <SectionContainer ref={section7Ref}>
-        <Section7 />
-      </SectionContainer>
-      <SectionContainer ref={section8Ref}>
-        <Section8 />
-      </SectionContainer>
-      <SectionContainer $scrollbarwidth={scrollbarWidth} ref={section9Ref}>
-        <Section9 />
-      </SectionContainer>
-      {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
+    <>
+      <MainWrapper $scrollbarwidth={scrollbarWidth} ref={appRef}>
+        <SectionContainer ref={section1Ref}>
+          <Section1 />
+        </SectionContainer>
+        <SectionContainer ref={section2Ref}>
+          <Section2 />
+        </SectionContainer>
+        <SectionContainer ref={section3Ref}>
+          <Section3 />
+        </SectionContainer>
+        <SectionContainer ref={section4Ref}>
+          <Section4 />
+        </SectionContainer>
+        <SectionContainer ref={section5Ref}>
+          <Section5 />
+        </SectionContainer>
+        <SectionContainer ref={section6Ref}>
+          <Section6 />
+        </SectionContainer>
+        <SectionContainer ref={section7Ref}>
+          <Section7 />
+        </SectionContainer>
+        <SectionContainer ref={section8Ref}>
+          <Section8 />
+        </SectionContainer>
+        <SectionContainer $scrollbarwidth={scrollbarWidth} ref={section9Ref}>
+          <Section9 />
+        </SectionContainer>
+        {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
         {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
 
-      {/* <ProgressBar scrollFactor={scrollFactor} /> */}
-      <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
-    </MainWrapper>
+        {/* <ProgressBar scrollFactor={scrollFactor} /> */}
+        <Scene sectionRatio={sectionRatio} />
+        <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
+      </MainWrapper>
+      <LoadingPage />
+    </>
   );
 }
 

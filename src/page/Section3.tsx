@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { NotionRenderer } from 'react-notion-x';
 import { ExtendedRecordMap } from 'notion-types';
+import Spacing from '@/components/Spacing';
 const Section3 = () => {
   const { notionPageId } = USER_PROFILE;
 
@@ -25,9 +26,8 @@ const Section3 = () => {
       });
   }, [notionPageId]);
   return (
-    <div style={{ position: 'relative', zIndex: 2, backgroundColor: 'white' }}>
-      {recordMap && <NotionRenderer recordMap={recordMap} fullPage={true} />}
-      {/* <Spacing size={2000} /> */}
+    <div style={{ position: 'relative', zIndex: 2 }}>
+      <Spacing size={5000} />
     </div>
   );
 };

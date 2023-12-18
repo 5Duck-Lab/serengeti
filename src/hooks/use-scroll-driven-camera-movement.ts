@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
 import { Vector3, Euler } from 'three';
+import cameraStore from '@/store/cameraStore';
+import opacityStore from '@/store/opacityStore';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
@@ -9,35 +11,45 @@ interface SceneProps {
 
 export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
   const scrollFactor = useScrollPosition();
-  const [cameraPosition, setCameraPosition] = useState(new Vector3().copy(CAMERA_POSITIONS.first.position));
-  const [cameraRotation, setCameraRotation] = useState(new Euler().copy(CAMERA_POSITIONS.first.rotation));
+
+  // const [cameraRotation, setCameraRotation] = useState(new Euler().copy(CAMERA_POSITIONS.first.rotation));
 
   useEffect(() => {
     const handleScroll = () => {
-      // <Important Logic>: 어떤 section 에 위치해있는지를 찾아주느 함수 호출
       const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
+
+      if (startKey === 'fifth') {
+        if (sectionScrollFactor <= 0.5) {
+          opacityStore.addOpacity(sectionScrollFactor);
+        } else {
+          opacityStore.addOpacity(-(sectionScrollFactor - 0.5));
+        }
+        return;
+      }
 
       // <Important Logic>: Update camera position
       const updatedCameraPosition = new Vector3()
         .copy(CAMERA_POSITIONS[startKey].position)
         .lerp(CAMERA_POSITIONS[endKey].position, sectionScrollFactor);
-      setCameraPosition(updatedCameraPosition);
+      // setCameraPosition(updatedCameraPosition);
 
-      // <Important Logic>: Update camera rotation
-      const startRotationVec = new Vector3().setFromEuler(CAMERA_POSITIONS[startKey].rotation);
-      const endRotationVec = new Vector3().setFromEuler(CAMERA_POSITIONS[endKey].rotation);
-      const updatedCameraRotationVec = startRotationVec.lerp(endRotationVec, sectionScrollFactor);
-      setCameraRotation(new Euler().setFromVector3(updatedCameraRotationVec));
+      cameraStore.setCameraPosition(updatedCameraPosition);
+      // 카메라 lookAt 업데이트
+      const startLookAt = CAMERA_POSITIONS[startKey].lookAtPosition;
+      const endLookAt = CAMERA_POSITIONS[endKey].lookAtPosition;
+      const updatedLookAtPosition = startLookAt.clone().lerp(endLookAt, sectionScrollFactor);
+
+      cameraStore.updateLookAtPosition(updatedLookAtPosition);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [scrollFactor, sectionRatio]);
 
-  return {
-    position: cameraPosition,
-    rotation: cameraRotation,
-  };
+  return {};
 };
 
 /**
@@ -55,6 +67,10 @@ const determineCameraKeysAndFactors = (scrollFactor: number, sectionRatio: Recor
   const section2 = section1 + sectionRatio.second;
   const section3 = section2 + sectionRatio.third;
   const section4 = section3 + sectionRatio.fourth;
+  const section5 = section4 + sectionRatio.fifth;
+  const section6 = section5 + sectionRatio.sixth;
+  const section7 = section6 + sectionRatio.seventh;
+  const section8 = section7 + sectionRatio.eighth;
 
   if (scrollFactor < section1) {
     startKey = 'first';
@@ -76,10 +92,30 @@ const determineCameraKeysAndFactors = (scrollFactor: number, sectionRatio: Recor
     endKey = 'fifth';
     sectionStartFactor = section3;
     sectionEndFactor = section4;
-  } else {
+  } else if (scrollFactor < section5) {
     startKey = 'fifth';
-    endKey = 'fifth';
+    endKey = 'sixth';
     sectionStartFactor = section4;
+    sectionEndFactor = section5;
+  } else if (scrollFactor < section6) {
+    startKey = 'sixth';
+    endKey = 'seventh';
+    sectionStartFactor = section5;
+    sectionEndFactor = section6;
+  } else if (scrollFactor < section7) {
+    startKey = 'seventh';
+    endKey = 'eighth';
+    sectionStartFactor = section6;
+    sectionEndFactor = section7;
+  } else if (scrollFactor < section8) {
+    startKey = 'eighth';
+    endKey = 'ninth';
+    sectionStartFactor = section7;
+    sectionEndFactor = section8;
+  } else {
+    startKey = 'ninth';
+    endKey = 'ninth';
+    sectionStartFactor = section8;
     sectionEndFactor = 1;
   }
 

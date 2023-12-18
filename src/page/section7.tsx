@@ -1,7 +1,7 @@
 import Spacing from '@/components/Spacing';
 import styled from 'styled-components';
 
-const Section4 = () => {
+const Section7 = () => {
   return (
     <div style={{ position: 'relative', zIndex: 2 }}>
       <Spacing size={5000} />
@@ -9,7 +9,7 @@ const Section4 = () => {
   );
 };
 
-export default Section4;
+export default Section7;
 const Content = styled.span`
   color: #fffdd0;
   white-space: pre-wrap;

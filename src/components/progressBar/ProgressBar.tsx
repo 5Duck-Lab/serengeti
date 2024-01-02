@@ -1,16 +1,14 @@
-import React from 'react';
 import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
 import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef';
+import sectionRatioStore from '@/store/sectionRatio.store.ts';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
-interface ProgressBarProps {
-  scrollFactor: number;
-  cumulativeSums: number[];
-}
-
-const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, cumulativeSums }) => {
+const ProgressBar = () => {
   const smoothScrollToRef = playSmoothScrollToRef();
+  const scrollFactor = useScrollPosition();
+  const cumulativeSums = sectionRatioStore.cumulativeSums;
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;

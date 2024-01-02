@@ -9,7 +9,6 @@ const Section2 = () => {
 
   return (
     <Wrapper>
-      <Spacing size={1000} />
       <RightContent>
         <Rainbow text={'About Me'} />
         <Spacing direction="vertical" size={100} />
@@ -21,7 +20,6 @@ const Section2 = () => {
         <TechStackIcon techs={techStack} />
         <Content>경력 : {career}</Content>
       </RightContent>
-      <Spacing size={1000} />
     </Wrapper>
   );
 };

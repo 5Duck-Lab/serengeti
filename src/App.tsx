@@ -1,6 +1,3 @@
-import { useRef } from 'react';
-import { useSectionRatio } from '@/hooks/use-section-ratio.ts';
-import { useScrollPosition } from '@/hooks/use-scroll-position';
 import Scene from '@/components/THREE/Scene';
 import Section1 from '@/page/Section1';
 import Section2 from '@/page/Section2';
@@ -10,62 +7,38 @@ import Section5 from '@/page/Section5';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import styled from 'styled-components';
 import LoadingPage from '@/components/LoadingPage.tsx';
+import { getScrollHeight } from '@/hooks/use-scroll-position.ts';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const appRef = useRef<HTMLDivElement>(null);
-  const section1Ref = useRef<HTMLDivElement>(null);
-  const section2Ref = useRef<HTMLDivElement>(null);
-  const section3Ref = useRef<HTMLDivElement>(null);
-  const section4Ref = useRef<HTMLDivElement>(null);
-  const section5Ref = useRef<HTMLDivElement>(null);
+  const [halfHeight, setHalfHeight] = useState(0);
 
-  //[TBD] 추후 jotai를 이용한 전역스토어로 변경
-  const sectionRatio: Record<string, number> = {
-    first: useSectionRatio(appRef, section1Ref),
-    second: useSectionRatio(appRef, section2Ref),
-    third: useSectionRatio(appRef, section3Ref),
-    fourth: useSectionRatio(appRef, section4Ref),
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setHalfHeight(getScrollHeight() / 2);
+    };
 
-  const sectionRefs: number[] = [
-    0,
-    sectionRatio.first as number,
-    sectionRatio.second as number,
-    sectionRatio.third as number,
-    sectionRatio.fourth as number,
-  ];
-
-  const scrollFactor = useScrollPosition();
-  const cumulativeSums = sectionRefs.reduce((acc, val) => {
-    const lastSum = acc.length > 0 ? acc[acc.length - 1] : 0;
-    acc.push(lastSum + (val as number));
-    return acc;
-  }, [] as number[]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <MainWrapper ref={appRef}>
-        <div ref={section1Ref}>
+      <MainWrapper>
+        <div style={{ height: `${halfHeight}px` }}>
           <Section1 />
-        </div>
-        <div ref={section2Ref}>
           <Section2 />
         </div>
-        <div ref={section3Ref}>
-          <Section3 />
-        </div>
-        <div ref={section4Ref}>
-          <Section4 />
-        </div>
-        <div ref={section5Ref}>
-          <Section5 />
-        </div>
+        {/*section3 노션영역은, 무조건 전체스크롤높이의 50%일때 뜸*/}
+        <Section3 />
+        <Section4 />
+        <Section5 />
         {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
         {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
 
         {/* <ProgressBar scrollFactor={scrollFactor} /> */}
-        <Scene sectionRatio={sectionRatio} />
-        <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
+        <Scene />
+        <ProgressBar />
       </MainWrapper>
       <LoadingPage />
     </>

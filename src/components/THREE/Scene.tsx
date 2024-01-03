@@ -6,13 +6,11 @@ import { useScrollDrivenCameraMovement } from '@/hooks/use-scroll-driven-camera-
 import Character from '@/components/THREE/Character';
 import { useScrollDrivenCharacterMovement } from '@/hooks/use-scroll-driven-character-movement.ts';
 import { useCharacterRotation } from '@/hooks/use-character-rotation.ts';
+import sectionRatioStore from '@/store/sectionRatio.store.ts';
 import InformationBoard from './InformationBoard';
 
-interface SceneProps {
-  sectionRatio: Record<string, number>;
-}
-
-const Scene: React.FC<SceneProps> = ({ sectionRatio }) => {
+const Scene = () => {
+  const { sectionRatio } = sectionRatioStore;
   const { position, rotation } = useScrollDrivenCameraMovement({ sectionRatio });
   const { characterPosition } = useScrollDrivenCharacterMovement({ sectionRatio });
   const characterRotation = useCharacterRotation(characterPosition);

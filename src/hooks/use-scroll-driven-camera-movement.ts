@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
-import { Vector3, Euler } from 'three';
+import { Vector3 } from 'three';
 import cameraStore from '@/store/cameraStore';
 import opacityStore from '@/store/opacityStore';
 

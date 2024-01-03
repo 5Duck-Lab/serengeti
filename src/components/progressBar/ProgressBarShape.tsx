@@ -10,12 +10,13 @@ const ProgressBarShape: React.FC<ProgressBarShapeProps> = ({ children }) => {
 };
 
 const StyledProgressBarContainer = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 5vw;
   right: 5vw;
   height: 10px;
   margin: 0 -5px;
-  // background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  background-color: grey;
   z-index: 2;
 `;
 

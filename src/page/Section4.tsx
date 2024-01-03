@@ -1,5 +1,4 @@
-import Spacing from '@/components/Spacing';
-import styled from 'styled-components';
+import Spacing from '@/components/Spacing.tsx';
 
 const Section4 = () => {
   return (
@@ -10,12 +9,3 @@ const Section4 = () => {
 };
 
 export default Section4;
-const Content = styled.span`
-  color: #fffdd0;
-  white-space: pre-wrap;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  display: block;
-  line-height: 1.5;
-`;

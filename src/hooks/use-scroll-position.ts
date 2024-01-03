@@ -13,9 +13,8 @@ export const useScrollPosition = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollFactor(scrollY / scrollMax); // 0 to 1
+      const scrollPercent = getScrollYOffset() / getScrollHeight();
+      setScrollFactor(scrollPercent);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -23,4 +22,18 @@ export const useScrollPosition = () => {
   }, []);
 
   return scrollFactor;
+};
+
+export const getScrollYOffset = (): number => {
+  const documentElement = document.documentElement;
+  const documentRect = documentElement.getBoundingClientRect();
+
+  return -documentRect.top || document.body.scrollTop || window.scrollY || documentElement.scrollTop || 0;
+};
+
+export const getScrollHeight = (): number => {
+  const doc = document.documentElement;
+  const body = document.body;
+
+  return (doc.scrollHeight || body.scrollHeight) - doc.clientHeight;
 };

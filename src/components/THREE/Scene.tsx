@@ -8,16 +8,18 @@ import { useScrollDrivenCharacterMovement } from '@/hooks/use-scroll-driven-char
 import { useCharacterRotation } from '@/hooks/use-character-rotation.ts';
 import sectionRatioStore from '@/store/sectionRatio.store.ts';
 import InformationBoard from './InformationBoard';
+import CameraSetting from './CameraSetting';
 
 const Scene = () => {
   const { sectionRatio } = sectionRatioStore;
-  const { position, rotation } = useScrollDrivenCameraMovement({ sectionRatio });
+  useScrollDrivenCameraMovement({ sectionRatio });
   const { characterPosition } = useScrollDrivenCharacterMovement({ sectionRatio });
   const characterRotation = useCharacterRotation(characterPosition);
 
   return (
     <Canvas shadows flat style={canvasStyle}>
-      <PerspectiveCamera makeDefault position={position} rotation={rotation} />
+      <PerspectiveCamera makeDefault />
+      <CameraSetting />
       <Character position={characterPosition} rotation={characterRotation} />
       <InformationBoard />
       <ambientLight />

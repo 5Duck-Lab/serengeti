@@ -1,9 +1,9 @@
-import Spacing from '@/components/Spacing';
+import Spacing from '@/components/Spacing.tsx';
 
 const Section4 = () => {
   return (
     <div style={{ position: 'relative', zIndex: 2 }}>
-      <Spacing size={3000} />
+      <Spacing size={5000} />
     </div>
   );
 };

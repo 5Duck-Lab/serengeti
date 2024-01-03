@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useGLTFLoader } from '@/hooks/use-loader';
 import { Vector3, Euler } from 'three';
-import { ObjectStore } from '@/store/BoudingBoxStore';
 
 import * as THREE from 'three';
 interface InformationBoardProps {
@@ -21,7 +20,6 @@ const InformationBoard: React.FC<InformationBoardProps> = ({
   }
 
   const gltf = useGLTFLoader(InformationBoardUrl);
-  ObjectStore.setBoard(gltf.scene);
 
   return <primitive ref={ref} object={gltf.scene} position={position} rotation={rotation} scale={[2, 2, 2]} />;
 };

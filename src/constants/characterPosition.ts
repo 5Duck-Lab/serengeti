@@ -1,6 +1,6 @@
 import { Vector3 } from 'three';
 
-export type CharacterKey = 'first' | 'second' | 'third' | 'fourth' | 'fifth';
+export type CharacterKey = 'first' | 'second' | 'third' | 'fourth' | 'fifth' | 'sixth' | 'seventh' | 'eighth' | 'ninth';
 
 export const CHARACTER_POSITIONS: Record<CharacterKey, { position: Vector3; controlPoint: Vector3 }> = {
   first: {
@@ -9,17 +9,33 @@ export const CHARACTER_POSITIONS: Record<CharacterKey, { position: Vector3; cont
   },
   second: {
     position: new Vector3(-15, -28, 134.0),
-    controlPoint: new Vector3(60, -28, 144.0),
+    controlPoint: new Vector3(30, -28, 140.0),
   },
   third: {
-    position: new Vector3(37, -28, 50),
+    position: new Vector3(50, -28, 117),
     controlPoint: new Vector3(10, -28, 60),
   },
   fourth: {
-    position: new Vector3(-14, -28, 50),
+    position: new Vector3(32, -28, 52),
     controlPoint: new Vector3(-37, -28, 25),
   },
   fifth: {
+    position: new Vector3(32, -28, 52),
+    controlPoint: new Vector3(-37, -28, 25),
+  },
+  sixth: {
+    position: new Vector3(32, -28, 52),
+    controlPoint: new Vector3(-37, -28, 25),
+  },
+  seventh: {
+    position: new Vector3(32, -28, 52),
+    controlPoint: new Vector3(-37, -28, 25),
+  },
+  eighth: {
+    position: new Vector3(7.506, -28, 62.9864),
+    controlPoint: new Vector3(7.506, -28, 62.9864),
+  },
+  ninth: {
     position: new Vector3(-32, -28, -4),
     controlPoint: new Vector3(-32, -28, -4),
   },

@@ -8,7 +8,9 @@ interface ProgressBarActiveProps {
 
 const StyledProgressBarActive = styled.div.attrs<{ $customwidth: number }>(({ $customwidth }) => ({
   style: {
-    width: `${$customwidth * 100}%`,
+    width: `calc(${$customwidth * 100}% - 6px)`, // 여백을 추가하여 전체 너비에서 6px를 빼줍니다 (양쪽에 3px씩).
+    margin: '0 3px', // 좌우 여백을 3px로 설정합니다.
+    opacity: 0.8,
   },
 }))<{ $customwidth: number }>`
   position: relative;

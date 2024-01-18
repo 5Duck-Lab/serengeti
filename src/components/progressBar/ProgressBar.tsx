@@ -43,16 +43,17 @@ const CheckpointsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: -17px;
+  top: -15px;
 `;
 
 const Checkpoint = styled.div<{ checked: boolean }>`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
   background-color: ${({ checked }) => (checked ? 'yellow' : 'gray')};
   cursor: pointer;
   z-index: 3;
+  opacity: ${({ checked }) => (checked ? 1.0 : 0.5)};
 `;
 
 const ProgressBarContainer = styled.div`

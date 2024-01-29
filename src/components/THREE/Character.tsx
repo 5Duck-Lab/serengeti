@@ -20,7 +20,7 @@ const Character: React.FC<CharacterProps> = ({
   const gltf = useGLTFLoader(characterUrl);
   useCharacterAnimation(gltf);
 
-  return <primitive object={gltf.scene} position={position} rotation={rotation} scale={[3, 3, 3]} />;
+  return <primitive object={gltf.scene} position={position} rotation={rotation} scale={[1.5, 1.5, 1.5]} />;
 };
 
 export default Character;

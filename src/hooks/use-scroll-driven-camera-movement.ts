@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
 import { Vector3 } from 'three';
@@ -11,22 +11,31 @@ interface SceneProps {
 
 export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
   const scrollFactor = useScrollPosition();
-
+  const [preScrollFactor, setPreScrollFactor] = useState(0);
   // const [cameraRotation, setCameraRotation] = useState(new Euler().copy(CAMERA_POSITIONS.first.rotation));
 
   useEffect(() => {
     const handleScroll = () => {
+      const scrollDirection = scrollFactor > preScrollFactor ? 'down' : 'up'; //scroll 방향 결정
       const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
 
       if (startKey === 'fifth') {
-        if (sectionScrollFactor <= 0.5) {
-          opacityStore.addOpacity(sectionScrollFactor);
+        if (scrollDirection === 'down') {
+          if (sectionScrollFactor <= 0.5) {
+            opacityStore.addOpacity(sectionScrollFactor * 2); // 내려갈 때 opacity 증가
+          } else {
+            opacityStore.addOpacity(-(sectionScrollFactor - 0.5));
+          }
         } else {
-          opacityStore.addOpacity(-(sectionScrollFactor - 0.5));
+          if (sectionScrollFactor >= 0.5) {
+            opacityStore.addOpacity((1 - sectionScrollFactor) * 2); // 올라갈 때 opacity 증가
+          } else {
+            opacityStore.addOpacity(-(1 - sectionScrollFactor)); // 올라갈 면서 opacity 감소
+          }
         }
         return;
       }
-
+      setPreScrollFactor(scrollFactor);
       // <Important Logic>: Update camera position
       const updatedCameraPosition = new Vector3()
         .copy(CAMERA_POSITIONS[startKey].position)
@@ -47,6 +56,7 @@ export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scrollFactor, sectionRatio]);
 
   return {};

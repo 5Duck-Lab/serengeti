@@ -1,12 +1,15 @@
 import { USER_PROFILE } from '@/constants/useProfile';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+
 import { NotionRenderer } from 'react-notion-x';
 import { ExtendedRecordMap } from 'notion-types';
-const Section3 = () => {
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { observer } from 'mobx-react';
+import opacityStore from '@/store/opacityStore';
+const Section3 = observer(() => {
   const { notionPageId } = USER_PROFILE;
-
   const [recordMap, setRecordMap] = useState<ExtendedRecordMap | null>(null);
+
   useEffect(() => {
     axios
       .get('https://serengeti-server.onrender.com/api/notion', {
@@ -25,11 +28,14 @@ const Section3 = () => {
       });
   }, [notionPageId]);
   return (
-    <div style={{ position: 'relative', zIndex: 2, backgroundColor: 'white' }}>
-      {recordMap && <NotionRenderer recordMap={recordMap} fullPage={true} />}
-      {/* <Spacing size={2000} /> */}
+    <div style={{ position: 'relative', zIndex: 2, right: 0 }}>
+      {recordMap && (
+        <div style={{ position: 'fixed', top: 0, left: 0, backgroundColor: 'white', opacity: opacityStore.opacity }}>
+          <NotionRenderer recordMap={recordMap} fullPage={true} />
+        </div>
+      )}
     </div>
   );
-};
-
+});
+//mail_icon
 export default Section3;

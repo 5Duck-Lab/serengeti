@@ -1,70 +1,42 @@
-import { useRef } from 'react';
-import { useSectionRatio } from '@/hooks/use-section-ratio.ts';
-import { useScrollPosition } from '@/hooks/use-scroll-position';
 import Scene from '@/components/THREE/Scene';
 import Section1 from '@/page/Section1';
 import Section2 from '@/page/Section2';
 import Section3 from '@/page/Section3';
-import Section4 from '@/page/Section4';
-import Section5 from '@/page/Section5';
+import Section4 from '@/page/Section4.tsx';
+import Section5 from '@/page/Section5.tsx';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import styled from 'styled-components';
+import LoadingPage from '@/components/LoadingPage.tsx';
+import { useEffect, useState } from 'react';
+import { getScrollHeight } from '@/hooks/use-scroll-position.ts';
 
 function App() {
-  const appRef = useRef<HTMLDivElement>(null);
-  const section1Ref = useRef<HTMLDivElement>(null);
-  const section2Ref = useRef<HTMLDivElement>(null);
-  const section3Ref = useRef<HTMLDivElement>(null);
-  const section4Ref = useRef<HTMLDivElement>(null);
-  const section5Ref = useRef<HTMLDivElement>(null);
+  const [halfHeight, setHalfHeight] = useState(0);
 
-  //[TBD] 추후 jotai를 이용한 전역스토어로 변경
-  const sectionRatio: Record<string, number> = {
-    first: useSectionRatio(appRef, section1Ref),
-    second: useSectionRatio(appRef, section2Ref),
-    third: useSectionRatio(appRef, section3Ref),
-    fourth: useSectionRatio(appRef, section4Ref),
-  };
+  useEffect(() => {
+    const handleScroll = () => {
+      setHalfHeight(getScrollHeight() / 2);
+    };
 
-  const sectionRefs: number[] = [
-    0,
-    sectionRatio.first as number,
-    sectionRatio.second as number,
-    sectionRatio.third as number,
-    sectionRatio.fourth as number,
-  ];
-
-  const scrollFactor = useScrollPosition();
-  const cumulativeSums = sectionRefs.reduce((acc, val) => {
-    const lastSum = acc.length > 0 ? acc[acc.length - 1] : 0;
-    acc.push(lastSum + (val as number));
-    return acc;
-  }, [] as number[]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <MainWrapper ref={appRef}>
-      <div ref={section1Ref}>
-        <Section1 />
-      </div>
-      <div ref={section2Ref}>
-        <Section2 />
-      </div>
-      <div ref={section3Ref}>
+    <>
+      <MainWrapper>
+        <div style={{ height: `${halfHeight}px` }}>
+          <Section1 />
+          <Section2 />
+        </div>
         <Section3 />
-      </div>
-      <div ref={section4Ref}>
         <Section4 />
-      </div>
-      <div ref={section5Ref}>
         <Section5 />
-      </div>
-      {/*계산결과(sectionRatio)를 직접전달, 추후 jotai 적용
-        {/*현재는 props drilling 이 너무 심함, App => Scene => useScrollDrivenCameraMovement */}
-
-      {/* <ProgressBar scrollFactor={scrollFactor} /> */}
-      <Scene sectionRatio={sectionRatio} />
-      <ProgressBar scrollFactor={scrollFactor} cumulativeSums={cumulativeSums} />
-    </MainWrapper>
+        <Scene />
+        <ProgressBar />
+      </MainWrapper>
+      <LoadingPage />
+    </>
   );
 }
 
@@ -72,4 +44,9 @@ export default App;
 // width: calc(100vw - ${props => props.$scrollbarWidth}px);
 const MainWrapper = styled.div`
   width: 100vw;
+  background-color: red;
 `;
+// const SectionContainer = styled.div<SectionContainer>`
+//   width: calc(100vw - 17px);
+//   background-color: red;
+// `;

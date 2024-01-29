@@ -1,21 +1,22 @@
-import React from 'react';
 import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
 import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef';
+// import sectionRatioStore from '@/store/sectionRatio.store.ts';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
-interface ProgressBarProps {
-  scrollFactor: number;
-  cumulativeSums: number[];
-}
-
-const ProgressBar: React.FC<ProgressBarProps> = ({ scrollFactor, cumulativeSums }) => {
+const ProgressBar = () => {
   const smoothScrollToRef = playSmoothScrollToRef();
+  const scrollFactor = useScrollPosition();
+
+  // const cumulativeSums = sectionRatioStore.cumulativeSums;
+  const cumulativeSums = [0, 0.2, 0.4, 0.7, 1]; //[FIXME]: 임시 하드코딩 해둠
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;
     const targetPosition = cumulativeSums[index];
     const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
+    console.log(totalScrollHeight);
     const scrollTo = targetPosition * totalScrollHeight * SCROLL_CORRECTION_FACTOR;
 
     smoothScrollToRef(scrollTo);
@@ -61,6 +62,7 @@ const ProgressBarContainer = styled.div`
   bottom: 20px;
   right: 20px;
   width: 300px;
+  height: 100px;
   z-index: 1000; // 다른 요소들 위에 표시되도록 z-index 설정
 `;
 

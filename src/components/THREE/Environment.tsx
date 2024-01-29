@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { observer } from 'mobx-react';
 import { Environment } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { RGBELoader } from 'three-stdlib';
@@ -20,5 +19,4 @@ const SceneEnvironment = () => {
   );
 };
 
-const Observer = observer(SceneEnvironment);
-export default Observer;
+export default SceneEnvironment;

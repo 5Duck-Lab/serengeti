@@ -6,7 +6,7 @@ const opacityStore = observable({
   opacityState: true, // true : 투명도 증가, false : 투명도 감소
   addOpacity(opacity: number) {
     const newOpacity = this.opacity + opacity;
-    this.opacity = Math.max(0, Math.min(maxOpacity, newOpacity));
+    this.opacity = Math.max(minOpacity, Math.min(maxOpacity, newOpacity));
   },
 });
 export default opacityStore;

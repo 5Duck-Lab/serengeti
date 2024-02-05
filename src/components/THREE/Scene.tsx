@@ -9,6 +9,7 @@ import { useCharacterRotation } from '@/hooks/use-character-rotation.ts';
 import sectionRatioStore from '@/store/sectionRatio.store.ts';
 import InformationBoard from './InformationBoard';
 import CameraSetting from './CameraSetting';
+import SceneEnvironment from './Environment.tsx';
 
 const Scene = () => {
   const { sectionRatio } = sectionRatioStore;
@@ -22,13 +23,16 @@ const Scene = () => {
       <CameraSetting />
       <Character position={characterPosition} rotation={characterRotation} />
       <InformationBoard />
-      <ambientLight />
+      <SceneEnvironment />
+      <ambientLight intensity={0.4} />
       <directionalLight
         castShadow
+        color={0xffffaa}
+        intensity={0.3}
         shadow-bias={-0.0001}
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
-        position={[10, 18, 11.5]}
+        position={[10, 100, 70]}
         shadow-camera-left={-50}
         shadow-camera-right={50}
         shadow-camera-top={50}

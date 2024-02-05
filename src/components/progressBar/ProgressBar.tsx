@@ -10,7 +10,7 @@ const ProgressBar = () => {
   const scrollFactor = useScrollPosition();
 
   // const cumulativeSums = sectionRatioStore.cumulativeSums;
-  const cumulativeSums = [0, 0.2, 0.4, 0.7, 1]; //[FIXME]: 임시 하드코딩 해둠
+  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98]; //[FIXME]: 임시 하드코딩 해둠
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;

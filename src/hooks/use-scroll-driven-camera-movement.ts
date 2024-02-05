@@ -18,7 +18,9 @@ export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
     const handleScroll = () => {
       const scrollDirection = scrollFactor > preScrollFactor ? 'down' : 'up'; //scroll 방향 결정
       const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
-
+      if (startKey === 'fourth' || startKey === 'sixth') {
+        opacityStore.addOpacity(-opacityStore.opacity);
+      }
       if (startKey === 'fifth') {
         if (scrollDirection === 'down') {
           if (sectionScrollFactor <= 0.5) {

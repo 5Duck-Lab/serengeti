@@ -16,7 +16,6 @@ const ProgressBar = () => {
     const SCROLL_CORRECTION_FACTOR = 1.01;
     const targetPosition = cumulativeSums[index];
     const totalScrollHeight = window.document.documentElement.scrollHeight - window.innerHeight;
-    console.log(totalScrollHeight);
     const scrollTo = targetPosition * totalScrollHeight * SCROLL_CORRECTION_FACTOR;
 
     smoothScrollToRef(scrollTo);

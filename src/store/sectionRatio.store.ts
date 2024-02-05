@@ -30,6 +30,5 @@ function cumulativeSum(sectionRatio: Record<string, number>) {
     cumulativeSumArray.push(cumulativeSumArray[cumulativeSumArray.length - 1] + sectionRatio[key]);
   }
 
-  console.log(cumulativeSumArray);
   return cumulativeSumArray;
 }

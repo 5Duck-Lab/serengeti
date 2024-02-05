@@ -20,7 +20,7 @@ const StyledProgressBarActive = styled.div.attrs<{ $customwidth: number }>(({ $c
   },
 }))<{ $customwidth: number }>`
   position: relative;
-  height: 10px;
+  height: 9px;
   background-color: yellow;
   z-index: 1;
   animation: ${breathAnimation} 3s infinite alternate; // 애니메이션 적용

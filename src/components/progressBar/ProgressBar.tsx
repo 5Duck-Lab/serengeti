@@ -33,9 +33,6 @@ const ProgressBar = () => {
               checked={scrollFactor >= cumulativeSums[index]}
               onClick={() => handleClick(index)}
               index={index}
-              onAnimationEnd={() => {
-                console.log('되나');
-              }}
             />
           ))}
         </CheckpointsContainer>
@@ -48,12 +45,12 @@ const CheckpointsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: -15px;
+  top: -14px;
 `;
 
 const BreathingCheckpoint = styled.div<{ checked: boolean; index: number }>`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 100%;
   background-color: ${({ checked }) => (checked ? 'yellow' : 'gray')};
   cursor: pointer;

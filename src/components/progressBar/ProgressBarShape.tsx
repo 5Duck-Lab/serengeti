@@ -19,7 +19,7 @@ const StyledProgressBarContainer = styled.div`
   position: absolute;
   bottom: 5vw;
   right: 5vw;
-  height: 10px;
+  height: 9px;
   margin: 0 -5px;
   width: 100%;
   background-color: grey;

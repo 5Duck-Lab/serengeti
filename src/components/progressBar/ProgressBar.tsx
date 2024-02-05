@@ -28,10 +28,14 @@ const ProgressBar = () => {
         <ProgressBarActive $customwidth={scrollFactor} cumulativeSums={cumulativeSums} />
         <CheckpointsContainer>
           {cumulativeSums.map((_, index) => (
-            <Checkpoint
+            <BreathingCheckpoint
               key={index}
               checked={scrollFactor >= cumulativeSums[index]}
               onClick={() => handleClick(index)}
+              index={index}
+              onAnimationEnd={() => {
+                console.log('되나');
+              }}
             />
           ))}
         </CheckpointsContainer>
@@ -47,14 +51,16 @@ const CheckpointsContainer = styled.div`
   top: -15px;
 `;
 
-const Checkpoint = styled.div<{ checked: boolean }>`
+const BreathingCheckpoint = styled.div<{ checked: boolean; index: number }>`
   width: 20px;
   height: 20px;
   border-radius: 100%;
   background-color: ${({ checked }) => (checked ? 'yellow' : 'gray')};
   cursor: pointer;
   z-index: 3;
-  opacity: ${({ checked }) => (checked ? 1.0 : 0.5)};
+  opacity: 1;
+
+  transition: background-color 0.5s ease;
 `;
 
 const ProgressBarContainer = styled.div`

@@ -1,4 +1,4 @@
-import { Vector3, Euler } from 'three';
+import { Vector3 } from 'three';
 
 export type CameraKey = 'first' | 'second' | 'third' | 'fourth' | 'fifth' | 'sixth' | 'seventh' | 'eighth' | 'ninth';
 

@@ -1,10 +1,16 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface ProgressBarActiveProps {
   $customwidth: number; // 변경된 prop 이름
   cumulativeSums: number[];
 }
+
+const breathAnimation = keyframes`
+  0% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.8; }
+`;
 
 const StyledProgressBarActive = styled.div.attrs<{ $customwidth: number }>(({ $customwidth }) => ({
   style: {
@@ -17,6 +23,7 @@ const StyledProgressBarActive = styled.div.attrs<{ $customwidth: number }>(({ $c
   height: 10px;
   background-color: yellow;
   z-index: 1;
+  animation: ${breathAnimation} 3s infinite alternate; // 애니메이션 적용
 `;
 
 const calculateWidth = (scrollFactor: number, cumulativeSums: number[]) => {

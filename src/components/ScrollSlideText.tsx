@@ -39,13 +39,7 @@ const ScrollSlideText = ({
     const tl = gsap.timeline({ paused: true });
     tl.to(textRef.current, {
       [direction === 'left' || direction === 'right' ? 'x' : 'y']: isScrollingDown
-        ? direction === 'left'
-          ? -100
-          : direction === 'right'
-          ? 100
-          : direction === 'down'
-          ? 100
-          : direction === 'up'
+        ? direction === 'left' || direction === 'up'
           ? -100
           : 100
         : 0,

@@ -10,7 +10,7 @@ const ProgressBar = () => {
   const scrollFactor = useScrollPosition();
 
   // const cumulativeSums = sectionRatioStore.cumulativeSums;
-  const cumulativeSums = [0, 0.2, 0.4, 0.7, 1]; //[FIXME]: 임시 하드코딩 해둠
+  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98]; //[FIXME]: 임시 하드코딩 해둠
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;
@@ -27,10 +27,11 @@ const ProgressBar = () => {
         <ProgressBarActive $customwidth={scrollFactor} cumulativeSums={cumulativeSums} />
         <CheckpointsContainer>
           {cumulativeSums.map((_, index) => (
-            <Checkpoint
+            <BreathingCheckpoint
               key={index}
               checked={scrollFactor >= cumulativeSums[index]}
               onClick={() => handleClick(index)}
+              index={index}
             />
           ))}
         </CheckpointsContainer>
@@ -43,16 +44,19 @@ const CheckpointsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
-  top: -17px;
+  top: -14px;
 `;
 
-const Checkpoint = styled.div<{ checked: boolean }>`
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+const BreathingCheckpoint = styled.div<{ checked: boolean; index: number }>`
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
   background-color: ${({ checked }) => (checked ? 'yellow' : 'gray')};
   cursor: pointer;
   z-index: 3;
+  opacity: 1;
+
+  transition: background-color 0.5s ease;
 `;
 
 const ProgressBarContainer = styled.div`

@@ -21,7 +21,7 @@ const Section1 = () => {
           text={line}
           style={{ paddingLeft: '20px', fontSize: '24px', color: '#fff', fontWeight: 'bold' }}
           direction="left"
-          duration={0.35}
+          duration={0.35 * ((index + 1) / aboutMeLines.length)}
         />
       ))}
       <Spacing size={1000} />

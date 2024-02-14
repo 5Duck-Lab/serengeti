@@ -13,7 +13,7 @@ export const CHARACTER_POSITIONS: Record<CharacterKey, { position: Vector3; cont
   },
   third: {
     position: new Vector3(50, -28, 117),
-    controlPoint: new Vector3(10, -28, 60),
+    controlPoint: new Vector3(30, -28, 60),
   },
   fourth: {
     position: new Vector3(32, -28, 52),
@@ -33,7 +33,7 @@ export const CHARACTER_POSITIONS: Record<CharacterKey, { position: Vector3; cont
   },
   eighth: {
     position: new Vector3(7.506, -28, 62.9864),
-    controlPoint: new Vector3(7.506, -28, 62.9864),
+    controlPoint: new Vector3(-32.506, -28, 45.9864),
   },
   ninth: {
     position: new Vector3(-32, -28, -4),

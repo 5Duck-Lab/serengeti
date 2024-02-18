@@ -1,14 +1,24 @@
 import Spacing from '@/components/Spacing';
 import { USER_PROFILE } from '@/constants/useProfile';
 import styled from 'styled-components';
+import { useRef } from 'react';
+import { useOnScreen } from '@/hooks/use-on-screen.ts';
 
 const Section5 = () => {
   const { number, email, githubLink } = USER_PROFILE;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useOnScreen(sectionRef, 'contact', {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1,
+  });
+
   const onClick = () => {
     window.open(githubLink);
   };
+
   return (
-    <div style={{ position: 'relative', zIndex: 2 }}>
+    <div style={{ position: 'relative', zIndex: 2 }} ref={sectionRef} id="section5">
       <Container>
         <SectionTitle> Contact Us</SectionTitle>
         <ContactInfo>연락처 : {number}</ContactInfo>

@@ -2,10 +2,19 @@ import styled from 'styled-components';
 import Spacing from '@/components/Spacing';
 import { USER_PROFILE } from '@/constants/useProfile';
 import ScrollSlideText from '@/components/ScrollSlideText';
+import styled from 'styled-components';
+import { useOnScreen } from '@/hooks/use-on-screen.ts';
+import { useRef } from 'react';
 
 const Section1 = () => {
   // Title Page
   const { title, aboutMe } = USER_PROFILE;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  useOnScreen(sectionRef, '', {
+    root: null,
+    rootMargin: '0px',
+    threshold: [0, 0.5],
+  });
 
   const splittedAboutMe = aboutMe.split('\n');
   const aboutMeLineCount = aboutMe.split('\n').length;

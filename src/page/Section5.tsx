@@ -18,10 +18,10 @@ const Section5 = () => {
   };
 
   return (
-    <div style={{ position: 'relative', zIndex: 2 }} ref={sectionRef} id="section5">
+    <div style={{ position: 'relative', zIndex: 2 }} id="section5">
       <Container>
         <SectionTitle> Contact Us</SectionTitle>
-        <ContactInfo>연락처 : {number}</ContactInfo>
+        <ContactInfo ref={sectionRef}>연락처 : {number}</ContactInfo>
         <ContactInfo>mail : {email}</ContactInfo>
         <ButtonContainer>
           <Button onClick={onClick}>

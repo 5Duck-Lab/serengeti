@@ -12,15 +12,15 @@ const Section2 = () => {
   useOnScreen(sectionRef, 'skillSet', {
     root: null,
     rootMargin: '0px',
-    threshold: [0.4, 0.6],
+    threshold: 0.1,
   });
   return (
-    <Wrapper ref={sectionRef} id="section2">
+    <Wrapper id="section2">
       <RightContent>
         <Rainbow text={'About Me'} />
         <Spacing direction="vertical" size={100} />
         <WhiteBar />
-        <Content>이름 : {name}</Content>
+        <Content ref={sectionRef}>이름 : {name}</Content>
         <Content>학력 : {education}</Content>
         <Content>직군 : {field}</Content>
         <Content>기술 스택: </Content>

@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Spacing from '@/components/Spacing';
 import { USER_PROFILE } from '@/constants/useProfile';
 import ScrollSlideText from '@/components/ScrollSlideText';
@@ -12,7 +11,7 @@ const Section1 = () => {
   useOnScreen(sectionRef, '', {
     root: null,
     rootMargin: '0px',
-    threshold: [0, 0.5],
+    threshold: 0.1,
   });
 
   const splittedAboutMe = aboutMe.split('\n');
@@ -20,8 +19,9 @@ const Section1 = () => {
   const ABOUTME_ANIMATION_DURATION = 0.35;
 
   return (
-    <Container>
+    <Container id="section1">
       <ScrollSlideText text={title} style={titleStyle} direction="up" />
+      <div ref={sectionRef}></div>
       {splittedAboutMe.map((line, index) => (
         <ScrollSlideText
           key={index}

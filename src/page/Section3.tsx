@@ -37,14 +37,22 @@ const Section3 = observer(() => {
       });
   }, [notionPageId]);
   return (
-    <div style={{ position: 'relative', zIndex: 2, right: 0 }} ref={sectionRef} id="section3">
+    <div style={{ position: 'relative', zIndex: 2, right: 0, height: 4000 }} ref={sectionRef} id="section3">
       {recordMap && (
-        <div style={{ position: 'fixed', top: 0, left: 0, backgroundColor: 'white', opacity: opacityStore.opacity }}>
+        <div
+          style={{
+            position: 'sticky',
+            top: 0,
+            left: 0,
+            backgroundColor: 'white',
+            opacity: opacityStore.opacity,
+          }}
+        >
           <NotionRenderer recordMap={recordMap} fullPage={true} />
         </div>
       )}
     </div>
   );
 });
-//mail_icon
+
 export default Section3;

@@ -2,7 +2,6 @@ import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
 import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef';
-// import sectionRatioStore from '@/store/sectionRatio.store.ts';
 import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
 const ProgressBar = () => {
@@ -10,7 +9,7 @@ const ProgressBar = () => {
   const scrollFactor = useScrollPosition();
 
   // const cumulativeSums = sectionRatioStore.cumulativeSums;
-  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98]; //[FIXME]: 임시 하드코딩 해둠
+  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98];
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;

@@ -44,15 +44,23 @@ const Container = styled.div`
 `;
 
 const titleStyle = {
+  fontFamily: 'Arial, sans-serif',
   paddingLeft: '20px',
   fontSize: '100px',
-  color: '#fffdd0',
-  fontWeight: '500',
+  fontWeight: 'bold',
+  color: 'transparent',
+  background: 'none',
+  backgroundImage: 'linear-gradient(to right top, #00ff99, #00ff00, #00ff99)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  webkitTextStroke: '1px black ',
 };
 
 const aboutMeLineStyle = {
+  fontFamily: 'Arial, sans-serif',
   paddingLeft: '20px',
   fontSize: '24px',
-  color: '#fff',
+  color: '#fffdd0',
   fontWeight: 'bold',
+  webkitTextStroke: '0.5px black ',
 };

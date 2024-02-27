@@ -1,39 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { reaction } from 'mobx';
+import scrollStore from '@/store/scrollStore.ts';
 
-/**
- * @description
- * Returns a number between 0 and 1 representing the scroll position of the page.
- *  - 0 에서 1 사이의 값을 리턴합니다
- *  - e.g) 스크롤을 거의 다 내렸을 때: 0.92
- *  - e.g) 웹사이트에 접속했을 때: 0
- *  - e.g) 웹사이트에 접속하고 조금 내렸을 때: 0.23
- */
-export const useScrollPosition = () => {
-  const [scrollFactor, setScrollFactor] = useState(0);
+type ScrollData = {
+  scrollPosition: number;
+  scrollDirection: string;
+  maxScroll: number;
+};
 
+export const useScrollPosition = (callback: (data: ScrollData) => void) => {
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPercent = getScrollYOffset() / getScrollHeight();
-      setScrollFactor(scrollPercent);
-    };
+    if (typeof callback !== 'function') {
+      return; //초기 로딩시 callback이 undefined로 들어오는 이슈가 있음
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    const dispose = reaction(
+      () => ({
+        scrollPosition: scrollStore.scrollPosition,
+        scrollDirection: scrollStore.scrollDirection,
+        maxScroll: scrollStore.maxScroll,
+      }),
+      callback
+    );
 
-  return scrollFactor;
-};
-
-export const getScrollYOffset = (): number => {
-  const documentElement = document.documentElement;
-  const documentRect = documentElement.getBoundingClientRect();
-
-  return -documentRect.top || document.body.scrollTop || window.scrollY || documentElement.scrollTop || 0;
-};
-
-export const getScrollHeight = (): number => {
-  const doc = document.documentElement;
-  const body = document.body;
-
-  return (doc.scrollHeight || body.scrollHeight) - doc.clientHeight;
+    return () => dispose();
+  }, [callback]);
 };

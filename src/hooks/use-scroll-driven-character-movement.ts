@@ -1,37 +1,33 @@
-import { useEffect, useState } from 'react';
-import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
+import { useState } from 'react';
 import { CameraKey } from '@/constants/cameraPosition.ts';
 import { CHARACTER_POSITIONS } from '@/constants/characterPosition.ts';
 import { Vector3, QuadraticBezierCurve3 } from 'three';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
 }
 
 export const useScrollDrivenCharacterMovement = ({ sectionRatio }: SceneProps) => {
-  const scrollFactor = useScrollPosition();
   const [characterPosition, setCharacterPosition] = useState(new Vector3().copy(CHARACTER_POSITIONS.first.position));
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // <Important Logic>: 어떤 section 에 위치해있는지를 찾아주느 함수 호출
-      const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
-      if (startKey === 'fourth' || startKey === 'fifth' || startKey === 'sixth' || startKey === 'seventh') {
-        return;
-      }
-      // <Important Logic>: Update camera position
-      const curve = new QuadraticBezierCurve3(
-        CHARACTER_POSITIONS[startKey].position,
-        CHARACTER_POSITIONS[startKey].controlPoint,
-        CHARACTER_POSITIONS[endKey].position
-      );
-      const curvePosition = curve.getPoint(sectionScrollFactor);
-      setCharacterPosition(curvePosition);
-    };
+  useScrollPosition(({ scrollPosition, maxScroll }) => {
+    const scrollFactor = scrollPosition / maxScroll;
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrollFactor, sectionRatio]);
+    // <Important Logic>: 어떤 section 에 위치해있는지를 찾아주는 함수 호출
+    const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
+    if (startKey === 'fourth' || startKey === 'fifth' || startKey === 'sixth' || startKey === 'seventh') {
+      return;
+    }
+    // <Important Logic>: Update camera position
+    const curve = new QuadraticBezierCurve3(
+      CHARACTER_POSITIONS[startKey].position,
+      CHARACTER_POSITIONS[startKey].controlPoint,
+      CHARACTER_POSITIONS[endKey].position
+    );
+    const curvePosition = curve.getPoint(sectionScrollFactor);
+    setCharacterPosition(curvePosition);
+  });
 
   return {
     characterPosition: characterPosition,

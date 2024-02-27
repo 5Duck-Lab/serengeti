@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
 import { Vector3 } from 'three';
 import cameraStore from '@/store/cameraStore';
@@ -10,12 +9,8 @@ interface SceneProps {
 }
 
 export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
-  const [preScrollFactor, setPreScrollFactor] = useState(0);
-
-  useScrollPosition(({ scrollPosition, maxScroll }) => {
+  useScrollPosition(({ scrollPosition, maxScroll, scrollDirection }) => {
     const scrollFactor = scrollPosition / maxScroll;
-    console.log(scrollFactor);
-    const scrollDirection = scrollFactor > preScrollFactor ? 'down' : 'up'; //scroll 방향 결정
     const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
     if (startKey === 'fourth' || startKey === 'sixth') {
       opacityStore.addOpacity(-opacityStore.opacity);
@@ -36,7 +31,7 @@ export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
       }
       return;
     }
-    setPreScrollFactor(scrollFactor);
+
     // <Important Logic>: Update camera position
     const updatedCameraPosition = new Vector3()
       .copy(CAMERA_POSITIONS[startKey].position)

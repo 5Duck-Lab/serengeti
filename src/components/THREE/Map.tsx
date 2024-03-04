@@ -1,7 +1,8 @@
 import { useGLTFLoader } from '@/hooks/use-loader';
 
 function Map() {
-  const { scene } = useGLTFLoader('/models/free_low_poly_forest.glb');
+  const mapURL = import.meta.env.VITE_MAP_URL as string;
+  const { scene } = useGLTFLoader(mapURL);
 
   return <primitive object={scene} />;
 }

@@ -45,7 +45,7 @@ const Scene = () => {
 export default Scene;
 
 const canvasStyle: React.CSSProperties = {
-  zIndex: 1,
+  zIndex: -1,
   width: '100vw',
   height: '100vh',
   position: 'fixed',

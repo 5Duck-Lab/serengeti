@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { CSSProperties } from 'styled-components';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
 const ScrollSlideText = ({
   text,
@@ -14,22 +15,11 @@ const ScrollSlideText = ({
   duration?: number;
 }) => {
   const textRef = useRef<HTMLDivElement>(null);
-  const [prevScrollPosition, setPrevScrollPosition] = useState<number>(0);
   const [isScrollingDown, setIsScrollingDown] = useState<boolean>(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentPosition = window.scrollY;
-      setIsScrollingDown(currentPosition > prevScrollPosition);
-      setPrevScrollPosition(currentPosition);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [prevScrollPosition]);
+  useScrollPosition(({ scrollDirection }) => {
+    setIsScrollingDown(scrollDirection === 'down');
+  });
 
   useEffect(() => {
     if (!textRef.current) {

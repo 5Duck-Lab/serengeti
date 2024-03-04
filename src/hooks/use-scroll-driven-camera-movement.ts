@@ -1,65 +1,50 @@
-import { useEffect, useState } from 'react';
-import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 import { CAMERA_POSITIONS, CameraKey } from '@/constants/cameraPosition.ts';
 import { Vector3 } from 'three';
 import cameraStore from '@/store/cameraStore';
 import opacityStore from '@/store/opacityStore';
+import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
 
 interface SceneProps {
   sectionRatio: Record<string, number>;
 }
 
 export const useScrollDrivenCameraMovement = ({ sectionRatio }: SceneProps) => {
-  const scrollFactor = useScrollPosition();
-  const [preScrollFactor, setPreScrollFactor] = useState(0);
-  // const [cameraRotation, setCameraRotation] = useState(new Euler().copy(CAMERA_POSITIONS.first.rotation));
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollDirection = scrollFactor > preScrollFactor ? 'down' : 'up'; //scroll 방향 결정
-      const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
-      if (startKey === 'fourth' || startKey === 'sixth') {
-        opacityStore.addOpacity(-opacityStore.opacity);
-      }
-      if (startKey === 'fifth') {
-        if (scrollDirection === 'down') {
-          if (sectionScrollFactor <= 0.5) {
-            opacityStore.addOpacity(sectionScrollFactor * 2); // 내려갈 때 opacity 증가
-          } else {
-            opacityStore.addOpacity(-(sectionScrollFactor - 0.5));
-          }
+  useScrollPosition(({ scrollPosition, maxScroll, scrollDirection }) => {
+    const scrollFactor = scrollPosition / maxScroll;
+    const { startKey, endKey, sectionScrollFactor } = determineCameraKeysAndFactors(scrollFactor, sectionRatio);
+    if (startKey === 'fourth' || startKey === 'sixth') {
+      opacityStore.addOpacity(-opacityStore.opacity);
+    }
+    if (startKey === 'fifth') {
+      if (scrollDirection === 'down') {
+        if (sectionScrollFactor <= 0.5) {
+          opacityStore.addOpacity(sectionScrollFactor * 2); // 내려갈 때 opacity 증가
         } else {
-          if (sectionScrollFactor >= 0.5) {
-            opacityStore.addOpacity((1 - sectionScrollFactor) * 2); // 올라갈 때 opacity 증가
-          } else {
-            opacityStore.addOpacity(-(1 - sectionScrollFactor)); // 올라갈 면서 opacity 감소
-          }
+          opacityStore.addOpacity(-(sectionScrollFactor - 0.5));
         }
-        return;
+      } else {
+        if (sectionScrollFactor >= 0.5) {
+          opacityStore.addOpacity((1 - sectionScrollFactor) * 2); // 올라갈 때 opacity 증가
+        } else {
+          opacityStore.addOpacity(-(1 - sectionScrollFactor)); // 올라갈 면서 opacity 감소
+        }
       }
-      setPreScrollFactor(scrollFactor);
-      // <Important Logic>: Update camera position
-      const updatedCameraPosition = new Vector3()
-        .copy(CAMERA_POSITIONS[startKey].position)
-        .lerp(CAMERA_POSITIONS[endKey].position, sectionScrollFactor);
-      // setCameraPosition(updatedCameraPosition);
+      return;
+    }
 
-      cameraStore.setCameraPosition(updatedCameraPosition);
-      // 카메라 lookAt 업데이트
-      const startLookAt = CAMERA_POSITIONS[startKey].lookAtPosition;
-      const endLookAt = CAMERA_POSITIONS[endKey].lookAtPosition;
-      const updatedLookAtPosition = startLookAt.clone().lerp(endLookAt, sectionScrollFactor);
+    // <Important Logic>: Update camera position
+    const updatedCameraPosition = new Vector3()
+      .copy(CAMERA_POSITIONS[startKey].position)
+      .lerp(CAMERA_POSITIONS[endKey].position, sectionScrollFactor);
 
-      cameraStore.updateLookAtPosition(updatedLookAtPosition);
-    };
+    cameraStore.setCameraPosition(updatedCameraPosition);
+    // 카메라 lookAt 업데이트
+    const startLookAt = CAMERA_POSITIONS[startKey].lookAtPosition;
+    const endLookAt = CAMERA_POSITIONS[endKey].lookAtPosition;
+    const updatedLookAtPosition = startLookAt.clone().lerp(endLookAt, sectionScrollFactor);
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [scrollFactor, sectionRatio]);
+    cameraStore.updateLookAtPosition(updatedLookAtPosition);
+  });
 
   return {};
 };

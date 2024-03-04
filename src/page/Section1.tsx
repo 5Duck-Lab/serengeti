@@ -3,6 +3,7 @@ import { USER_PROFILE } from '@/constants/useProfile';
 import ScrollSlideText from '@/components/ScrollSlideText';
 import { useOnScreen } from '@/hooks/use-on-screen.ts';
 import { useRef } from 'react';
+import styled from 'styled-components';
 
 const Section1 = () => {
   // Title Page
@@ -53,7 +54,7 @@ const titleStyle = {
   backgroundImage: 'linear-gradient(to right top, #00ff99, #00ff00, #00ff99)',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  webkitTextStroke: '1px black ',
+  WebkitTextStroke: '1px black ',
 };
 
 const aboutMeLineStyle = {
@@ -62,5 +63,5 @@ const aboutMeLineStyle = {
   fontSize: '24px',
   color: '#fffdd0',
   fontWeight: 'bold',
-  webkitTextStroke: '0.5px black ',
+  WebkitTextStroke: '0.5px black ',
 };

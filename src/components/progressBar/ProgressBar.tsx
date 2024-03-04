@@ -2,14 +2,13 @@ import ProgressBarShape from './ProgressBarShape';
 import ProgressBarActive from './ProgressBarActive';
 import styled from 'styled-components';
 import { playSmoothScrollToRef } from '@/utils/playSmoothScrollToRef';
-import { useScrollPosition } from '@/hooks/use-scroll-position.ts';
+import scrollStore from '@/store/scrollStore.ts';
+import { observer } from 'mobx-react';
 
 const ProgressBar = () => {
   const smoothScrollToRef = playSmoothScrollToRef();
-  const scrollFactor = useScrollPosition();
-
-  // const cumulativeSums = sectionRatioStore.cumulativeSums;
-  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98];
+  const scrollFactor = scrollStore.scrollPosition / scrollStore.maxScroll;
+  const cumulativeSums = [0, 0.12, 0.52, 0.8, 0.98]; //[FIXME]: 임시 하드코딩 해둠
 
   const handleClick = (index: number) => {
     const SCROLL_CORRECTION_FACTOR = 1.01;
@@ -67,4 +66,5 @@ const ProgressBarContainer = styled.div`
   z-index: 1000; // 다른 요소들 위에 표시되도록 z-index 설정
 `;
 
-export default ProgressBar;
+const Observer = observer(ProgressBar);
+export default Observer;

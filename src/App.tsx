@@ -7,46 +7,56 @@ import Section5 from '@/page/Section5.tsx';
 import ProgressBar from '@/components/progressBar/ProgressBar';
 import styled from 'styled-components';
 import LoadingPage from '@/components/LoadingPage.tsx';
-import { useEffect, useState } from 'react';
-import { getScrollHeight } from '@/hooks/use-scroll-position.ts';
+import { useEffect } from 'react';
+import LocomotiveScroll from 'locomotive-scroll';
+import scrollStore from '@/store/scrollStore.ts';
 
 function App() {
-  const [halfHeight, setHalfHeight] = useState(0);
-
   useEffect(() => {
-    const handleScroll = () => {
-      setHalfHeight(getScrollHeight() / 2);
-    };
+    const scrollEl = document.querySelector('#main-container') as HTMLElement;
+    if (!scrollEl) {
+      return;
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    let lastScrollY = 0;
+    const locoScroll = new LocomotiveScroll({
+      el: scrollEl,
+      smooth: true,
+      lerp: 0.1, // 부드러운 정도: 0 ~ 1
+      multiplier: 0.5, // 스크롤 속도(곱해짐)
+    });
+
+    locoScroll.on('scroll', args => {
+      const direction = args.scroll.y > lastScrollY ? 'down' : 'up';
+      scrollStore.setMaxScroll(args.limit.y);
+      scrollStore.setScrollPosition(args.scroll.y);
+      scrollStore.setScrollDirection(direction);
+      lastScrollY = args.scroll.y;
+    });
+
+    return () => {
+      locoScroll.destroy();
+    };
   }, []);
 
   return (
     <>
-      <MainWrapper>
-        <div style={{ height: `${halfHeight}px` }}>
-          <Section1 />
-          <Section2 />
-        </div>
+      <MainWrapper id="main-container">
+        <Section1 />
+        <Section2 />
         <Section3 />
         <Section4 />
         <Section5 />
-        <Scene />
-        <ProgressBar />
       </MainWrapper>
+      <Scene />
+      <ProgressBar />
       <LoadingPage />
     </>
   );
 }
 
 export default App;
-// width: calc(100vw - ${props => props.$scrollbarWidth}px);
+
 const MainWrapper = styled.div`
   width: 100vw;
-  background-color: red;
 `;
-// const SectionContainer = styled.div<SectionContainer>`
-//   width: calc(100vw - 17px);
-//   background-color: red;
-// `;

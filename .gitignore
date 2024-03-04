@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 src/constants/useProfile.ts
 #env
-.env*
+.env.local

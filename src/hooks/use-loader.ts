@@ -14,13 +14,13 @@ const useGLTFLoader = (url: string): GLTF & ObjectMap => {
     (loader: GLTFLoader) => {
       //set KTX transcoder for loading
       const ktx2Loader = new KTX2Loader();
-      ktx2Loader.setTranscoderPath('/gltf/basis/');
+      ktx2Loader.setTranscoderPath('https://unpkg.com/three@0.134.0/examples/js/libs/basis/');
       ktx2Loader.detectSupport(gl);
       loader.setKTX2Loader(ktx2Loader);
 
       //set Draco decoder for loading
       const dracoLoader = new DRACOLoader();
-      dracoLoader.setDecoderPath('/gltf/draco/');
+      dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
       loader.setDRACOLoader(dracoLoader);
     },
     (progress: ProgressEvent) => {

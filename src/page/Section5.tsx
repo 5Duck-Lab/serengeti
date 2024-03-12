@@ -20,9 +20,17 @@ const Section5 = () => {
   return (
     <div style={{ position: 'relative', zIndex: 2 }} id="section5">
       <Container>
-        <SectionTitle> Contact Us</SectionTitle>
-        <ContactInfo ref={sectionRef}>연락처 : {number}</ContactInfo>
-        <ContactInfo>mail : {email}</ContactInfo>
+        <SectionTitle className="text-shadow-black"> Contact Us</SectionTitle>
+        <dl>
+          <ContactInfoTitle className="text-shadow-black" ref={sectionRef}>
+            Phone
+          </ContactInfoTitle>
+          <ContactInfo className="text-shadow-red">{number}</ContactInfo>
+        </dl>
+        <dl>
+          <ContactInfoTitle className="text-shadow-black">mail</ContactInfoTitle>
+          <ContactInfo className="text-shadow-red">{email}</ContactInfo>
+        </dl>
         <ButtonContainer>
           <Button onClick={onClick}>
             <Img src={'/github-mark.png'} />
@@ -30,7 +38,7 @@ const Section5 = () => {
           </Button>
         </ButtonContainer>
       </Container>
-      <Spacing size={550} />
+      <Spacing size={450} />
     </div>
   );
 };
@@ -39,14 +47,24 @@ export default Section5;
 const Container = styled.div`
   position: absolute;
   z-index: 3;
-  left: 60%;
+  right: 60%;
 `;
-const SectionTitle = styled.h1`
+const SectionTitle = styled.strong`
+  font-size: min(7vw, 120px);
   color: #fffdd0;
 `;
-const ContactInfo = styled.h3`
+const ContactInfoTitle = styled.dt`
+  font-size: min(3vw, 60px);
+  font-weight: 700;
   color: #fffdd0;
 `;
+
+const ContactInfo = styled.dd`
+  font-size: min(2.5vw, 50px);
+  font-weight: 300;
+  color: #fffeee;
+`;
+
 const ButtonContainer = styled.div`
   width: 100%;
   display: flex;

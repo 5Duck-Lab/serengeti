@@ -83,3 +83,11 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.text-shadow-black {
+  text-shadow: 0 0 10px black;
+}
+
+.text-shadow-red {
+  text-shadow: 0 0 5px #621111;
+}
